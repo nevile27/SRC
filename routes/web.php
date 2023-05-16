@@ -20,3 +20,4 @@ Route::get('/', function () {
 });
 Route::post('/', [UploadController::class, 'verif_up']);
 Route::get('/extraction', [AnalyseController::class, 'dataExtract'])->name('first');
+Route::get('/rapport', [AnalyseController::class, 'dataPresentation'])->name('second');

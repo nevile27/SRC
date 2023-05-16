@@ -13,8 +13,11 @@ class UploadController extends Controller
         $request->validate([
             'file' => 'required|file|max:2000',
         ]);
-        $path = $request->file('file')->storeAs('test', 'data.csv', 'public');
+        // circonstance, élément, information, postulat, précision, principe, renseignement.
+        $prefix = "donnee";
+        $path = $request->file('file')->storeAs('csv', $prefix.'.csv', 'public');
         Session::put('chemin', $path);
+        Session::put('prefixe', $prefix);
         return view('upload',['path'=>$path]);
     }
 }

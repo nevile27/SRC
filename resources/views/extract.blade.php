@@ -7,10 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-    <ul>
-        @foreach ($data as $colonne)
-            <li>{{ $colonne }}</li>
+    <table>
+        @foreach ($data as $key => $ligne)
+            <tr>
+                @if ($key == 0)
+                    @foreach ($ligne as $item)
+                        <th>{{ $item }}</th>
+                    @endforeach
+                @else
+                    @foreach ($ligne as $item)
+                        <td>{{ $item }}</td>
+                    @endforeach
+                @endif
+            </tr>
         @endforeach
-    </ul>
+    </table>
 </body>
 </html>
