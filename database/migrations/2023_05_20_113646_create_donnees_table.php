@@ -16,13 +16,13 @@ class CreateDonneesTable extends Migration
         Schema::create('donnees', function (Blueprint $table) {
             $table->id();
             $table->string('airline');
-			$table->string('avail_seat_km_per_week');
-			$table->string('incidents_85_99');
-			$table->string('fatal_accidents_85_99');
-			$table->string('fatalities_85_99');
-			$table->string('incidents_00_14');
-			$table->string('fatal_accidents_00_14');
-			$table->string('fatalities_00_14');
+			$table->integer('avail_seat_km_per_week');
+			$table->integer('incidents_85_99');
+			$table->integer('fatal_accidents_85_99');
+			$table->integer('fatalities_85_99');
+			$table->integer('incidents_00_14');
+			$table->integer('fatal_accidents_00_14');
+			$table->integer('fatalities_00_14');
 			$table->timestamps();
         });
     }

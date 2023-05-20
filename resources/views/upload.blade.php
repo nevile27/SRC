@@ -25,8 +25,7 @@
                 <input type="file" name="file" id="file">
             </div>
             <div>
-                <label for="">Choisir un nom pour le fichier (1 mot en langue francaise au singulier): </label>
-                <input type="" name="" id="">
+                <img src="{{ asset('images/camamber.png') }}" alt="img">
             </div>
             <input type="submit" value="Envoyer">
         </form>

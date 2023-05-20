@@ -26,6 +26,9 @@ class DataType {
             }
             switch ($real_type) {
                 case 'int':
+                    if(array_key_exists('bigint',$temp_types)){
+                        $real_type = "bigint";
+                    }
                     if(array_key_exists('float',$temp_types)){
                         $real_type = "float";
                     }
@@ -63,6 +66,9 @@ class DataType {
     {
         if (is_numeric($var)) {
             if(is_int(1+$var)){
+                if(strlen((string)abs($var))>10){
+                    return "bigint";
+                }
                 return "int";
             }
             if(is_float(1+$var)){
@@ -71,7 +77,7 @@ class DataType {
             if(is_double(1+$var)){
                 return "double";
             }
-            return "real";
+            return "decimal";
         }
         if(is_string($var)){
             if(strlen($var)>240){
