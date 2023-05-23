@@ -9,105 +9,25 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <p>En-tete</p>
-    </header>
-    <section>
-        <ul>
-            <li>
-                <div class="card">
-                    <a href="http://"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                    <div class="container">
-                      <h4><b>John Doe</b></h4>
-                      <p>Architect & Engineer</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="card">
-                    <a href="http://"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                    <div class="container">
-                      <h4><b>John Doe</b></h4>
-                      <p>Architect & Engineer</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="card">
-                    <a href="http://"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                    <div class="container">
-                      <h4><b>John Doe</b></h4>
-                      <p>Architect & Engineer</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="card">
-                    <a href="http://"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                    <div class="container">
-                      <h4><b>John Doe</b></h4>
-                      <p>Architect & Engineer</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="card">
-                    <a href="http://"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                    <div class="container">
-                      <h4><b>John Doe</b></h4>
-                      <p>Architect & Engineer</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="card">
-                    <a href="http://"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                    <div class="container">
-                      <h4><b>John Doe</b></h4>
-                      <p>Architect & Engineer</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="card">
-                    <a href="http://"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                    <div class="container">
-                      <h4><b>John Doe</b></h4>
-                      <p>Architect & Engineer</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="card">
-                    <a href="http://"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                    <div class="container">
-                      <h4><b>John Doe</b></h4>
-                      <p>Architect & Engineer</p>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </section>
+    @include('header')
+    @include('nav')
     <section>
         <div id="visual">
             <div id="v1">
                 <table>
+                    <tr id="head">
+                        <th> </th>
+                        @foreach ($colonnes as $item)
+                            <th>{{ $item }}</th>
+                        @endforeach
+                    </tr>
                     @foreach ($data as $key => $ligne)
-                        @if ($key == 0)
-                            <tr id="head">
-                                <th> </th>
-                                @foreach ($ligne as $item)
-                                    <th>{{ $item }}</th>
-                                @endforeach
-                            </tr>
-                        @else
-                            <tr class="tr{{($key%2 == 0)? 1:2}}">
-                                <td>{{$key}}</td>
-                                @foreach ($ligne as $item)
-                                    <td>{{ $item }}</td>
-                                @endforeach
-                            </tr>
-                        @endif
+                        <tr class="tr{{($key%2 == 0)? 1:2}}">
+                            <td>{{$key}}</td>
+                            @foreach ($colonnes as $item)
+                                <td>{{ $ligne[$item] }}</td>
+                            @endforeach
+                        </tr>
                     @endforeach
                 </table>
             </div>
@@ -115,19 +35,21 @@
                 <table>
                     <tr>
                         <th></th>
-                        @foreach ($data[0] as $item)
+                        @foreach ($colonnes as $item)
                             <th>{{ $item }}</th>
                         @endforeach
                     </tr>
                     <tr>
                         <td></td>
-                        @foreach ($data[0] as $key => $item)
+                        <?php $i = 0;?>
+                        @foreach ($colonnes as $key => $item)
                             <td>
-                                @if (in_array(Session::get('types')[$key],['int','bigint','float','double','real','decimal']))
-                                    Min: <br>
-                                    Max: <br>
-                                    Moy: <br>
-                                    EcT: <br>
+                                @if (in_array($types[$key],['int','bigint','float','double','real','decimal']))
+                                    Min: {{ $mins[$i] }}<br>
+                                    Max: {{ $maxs[$i] }}<br>
+                                    Moy: {{ $moys[$i] }}<br>
+                                    EcT: {{ $ects[$i] }}<br>
+                                    <?php $i++;?>
                                 @else
                                     Valeurs non numériques
                                 @endif
@@ -143,17 +65,15 @@
                     <th>Colonnes</th>
                     <th>Types detectés</th>
                 </tr>
-                @foreach ($data[0] as $key => $item)
+                @foreach ($colonnes as $key => $item)
                     <tr>
                         <td>{{$item}}</td>
-                        <td>{{Session::get('types')[$key]}}</td>
+                        <td>{{$types[$key]}}</td>
                     </tr>
                 @endforeach
             </table>
         </div>
     </section>
-    <footer>
-        <p>Pied de page</p>
-    </footer>
+    @include('footer')
 </body>
 </html>

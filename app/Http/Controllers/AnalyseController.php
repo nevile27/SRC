@@ -123,6 +123,18 @@ class AnalyseController extends Controller
             fwrite($model_stream, $content);
             fclose($model_stream);
 
+            // Modification du fichier de control du dashboard
+            $controller = file_get_contents("..\\app\\Http\\Controllers\\DashController.php");
+            if ($controller == false) {
+                $remove = system(storage_path('app\\shell\\') . 'remove.sh ' . $param .' '. $mig_name );
+                return view('error',['error'=>0]);
+            }
+            $content = str_replace("DataType",$param,$controller);
+            $controller_stream = fopen("..\\app\\Http\\Controllers\\DashController.php", 'r+');
+            ftruncate($controller_stream,0);
+            fwrite($controller_stream, $content);
+            fclose($controller_stream);
+
             // Execution du fichier de migration, creation de la nouvelle table 
             $exec_migrate = system(storage_path('app\\shell\\') . 'migrate.sh');
 
@@ -140,7 +152,7 @@ class AnalyseController extends Controller
             if(DB::table($prefix . 's')->insert($inserts) == false){
                 return view('error',['error'=>7]);
             }
-            return view('dash_tab', ['data' => $data]);
+            return redirect(route('third'));
         }
         return view('error',['error'=>8]);
     }
