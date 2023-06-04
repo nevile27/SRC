@@ -2,7 +2,7 @@
     <ul>
         <li>
             <div class="card">
-                <a href="http://"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
+                <a href="{{ route('third') }}"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
                 <div class="container">
                   <h4><b>John Doe</b></h4>
                   <p>Architect & Engineer</p>
@@ -11,7 +11,7 @@
         </li>
         <li>
             <div class="card">
-                <a href="http://"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
+                <a href="{{ route('fourth') }}"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
                 <div class="container">
                   <h4><b>John Doe</b></h4>
                   <p>Architect & Engineer</p>
@@ -20,7 +20,7 @@
         </li>
         <li>
             <div class="card">
-                <a href="http://"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
+                <a href="{{ route('five') }}"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
                 <div class="container">
                   <h4><b>John Doe</b></h4>
                   <p>Architect & Engineer</p>
@@ -29,7 +29,7 @@
         </li>
         <li>
             <div class="card">
-                <a href="http://"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
+                <a href="{{ route('six') }}"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
                 <div class="container">
                   <h4><b>John Doe</b></h4>
                   <p>Architect & Engineer</p>
@@ -38,7 +38,7 @@
         </li>
         <li>
             <div class="card">
-                <a href="http://"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
+                <a href="{{ route('seven') }}"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
                 <div class="container">
                   <h4><b>John Doe</b></h4>
                   <p>Architect & Engineer</p>

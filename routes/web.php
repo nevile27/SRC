@@ -24,4 +24,16 @@ Route::get('/extraction', [AnalyseController::class, 'dataExtract'])->name('firs
 Route::get('/rapport', [AnalyseController::class, 'dataPresentation'])->name('second');
 Route::get('/tableau', [DashController::class, 'dashTab'])->name('third');
 Route::get('/batonnet_vertical', [DashController::class, 'dashVerticalStick'])->name('fourth');
+Route::post('/batonnet_vertical', [DashController::class, 'dashVerticalStick']);
+/*
+Route::resource('/ajax', 'VStickAjaxController',[VStickAjaxController::class]);
+Route::post('/ajax', [VStickAjaxController::class, 'dashVerticalStick']);
+*/
 Route::get('/batonnet_horizontal', [DashController::class, 'dashHorizontalStick'])->name('five');
+Route::post('/batonnet_horizontal', [DashController::class, 'dashHorizontalStick']);
+
+Route::get('/histogramme_vertical', [DashController::class, 'dashVerticalHist'])->name('six');
+Route::post('/histogramme_vertical', [DashController::class, 'dashVerticalHist']);
+
+Route::get('/histogramme_horizontal', [DashController::class, 'dashHorizontalHist'])->name('seven');
+Route::post('/histogramme_horizontal', [DashController::class, 'dashHorizontalHist']);

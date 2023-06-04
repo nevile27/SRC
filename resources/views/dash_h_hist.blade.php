@@ -23,28 +23,28 @@
             </div>
         </div>
         <div id="param">
-            <form action="{{ route('five') }}" method="post" id="form_param">
+            <form action="{{ route('six') }}" method="post" id="form_param">
                 @csrf
                 <input type="hidden" name="h">
                 <div>
                     <h5>Abscisses</h5>
                     @foreach ($colonnes as $cle => $item)
-                        <input type="checkbox" id="x{{ $cle }}" name="x{{ $cle }}" value="{{ $cle }}" {{(isset($y) && in_array($cle,$x))? 'checked':''}}>
-                        <label for="x{{ $cle }}">{{ $item }}</label><br>
+                        <input type="checkbox" id="y{{ $cle }}" name="y{{ $cle }}" value="{{ $cle }}" {{(isset($x) && $cle == $x)? 'checked':''}}>
+                        <label for="y{{ $cle }}">{{ $item }}</label><br>
                     @endforeach
                 </div>
                 <div>
-                    <h5>Ordonnée</h5>
-                    @foreach ($colonnes as $cle => $item)
-                        <input type="radio" id="y" name="y" value="{{ $cle }}" {{(isset($y) && $cle == $y)? 'checked':''}}>
-                        <label for="y">{{ $item }}</label><br>
-                    @endforeach
+                    <h5>Mode</h5>
+                    <input type="radio" class="mode" name="mode" value="stack" checked>
+                    <label for="type">Entassé</label><br>
+                    <input type="radio" class="mode" name="mode" value="overlay">
+                    <label for="type">Supperposé</label><br>
                 </div>
                 <button type="submit">Valider</button>
             </form>
         </div>
     </section>
     @include('footer')
-    <script src="{{asset('js/h_stick.js')}}"></script>
+    <script src="{{asset('js/h_hist.js')}}"></script>
 </body>
 </html>
