@@ -18,8 +18,11 @@ class AnalyseController extends Controller
         $flux = fopen(storage_path('app\\public\\' . $path), 'r');
         $i = 0;
         while (!feof($flux)) {
-            $data[$i] = fgetcsv($flux);
-            $i++;
+            $line = fgetcsv($flux);
+            if($line){
+                $data[$i] = $line;
+                $i++;
+            }
         }
         
         if ($data) {

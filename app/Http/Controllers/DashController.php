@@ -219,4 +219,58 @@ class DashController extends Controller
             'ects' => $ects,
         ]);
     }
+
+    public function dashCircle(Request $request)
+    {
+        $statFunc = new StatFunc();
+        //$model = new ();
+        $data = Donnee::all();
+        $types = Session::get('types');
+        $colonnes = Session::get('colonnes');
+        $maxs = $mins = $moys = $ects = [];
+        $xData = $yData = [];
+        if ($request->has('h')) {
+            $x = $request->x;
+            $y = [];
+            $yName = [];
+            $inputs = $request->input();
+            foreach ($inputs as $key => $input) {
+                if(str_contains($key,'y')){
+                    array_push($y,$request->input($key));
+                    array_push($yName,$colonnes[$input]);
+                }
+            }
+            foreach ($y as $val) {
+                array_push($yData,$data->pluck($colonnes[$val])->toArray());
+            }
+            $xData = $data->pluck($colonnes[$x])->toArray();
+            $rep = [
+                'x' => $xData,
+                'y' => $yData,
+                'yName' => $yName,
+            ];
+            return response()->json($rep); //->withCallback($request->input('callback'))
+        } else {
+            
+        }
+        return view('dash_circle', [
+            'data' => $data,
+            'colonnes' => $colonnes,
+            'types' => $types,
+            'maxs' => $maxs,
+            'mins' => $mins,
+            'moys' => $moys,
+            'ects' => $ects,
+        ]);
+    }
+    
+    public function dashCloud(Request $request)
+    {
+        # code...
+    }
+    
+    public function dashLinear(Request $request)
+    {
+        # code...
+    }
 }

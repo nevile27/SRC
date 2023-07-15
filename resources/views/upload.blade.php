@@ -4,31 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{asset('css/upload.css')}}">
     <title>Document</title>
 </head>
 <body>
     @isset($path)
-        <div>
+        <form action="{{ route('first') }}">
             <h2>Fichier enregistré</h2>
-            <button><a href="{{ route('first') }}">ANALYSER LES DONNEES</a></button>
-        </div>
+            <button>ANALYSER LES DONNEES</button>
+        </form>
     @else
-        @if ($errors->any)
-            @foreach ($errors->all() as $error)
-                <div style="color: red; font-size: 24;">{{ $error }}</div>
-            @endforeach
-        @endif
         <form action="/" method="post" enctype="multipart/form-data">
             @csrf
+            @if ($errors->any)
+                @foreach ($errors->all() as $error)
+                    <div id="error">{{ $error }}</div>
+                @endforeach
+            @endif
             <div>
-                <label for="file">Inserer le fichier CSV :</label>
-                <input type="file" name="file" id="file">
+                <label for="file">
+                    <i class="fa-solid fa-file-arrow-up fa-shake"></i> 
+                    <span id="name">Sélectionner le fichier CSV</span>
+                </label>
+                <input type="file" name="fichier" id="file" style="display: none"/>
             </div>
             <div>
-                <img src="{{ asset('images/camamber.png') }}" alt="img">
+                <button type="submit" id="submit" class="none">Envoyer</button>
             </div>
-            <input type="submit" value="Envoyer">
         </form>
     @endisset
+    <script>
+        document.querySelector('#file').onchange = function (e) {
+            e.preventDefault();
+            var files = this.files,
+                name = files[0].name;
+            console.log(files);
+            var span = document.querySelector('#name');
+            span.innerHTML = name;
+            span.style.fontStyle = "italic";
+        }
+    </script>
 </body>
 </html>

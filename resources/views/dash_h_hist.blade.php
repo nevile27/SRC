@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('css/dash_global.css')}}">
-    <link rel="stylesheet" href="{{asset('css/dash_tab.css')}}">
+    <link rel="stylesheet" href="">
     <script src="https://cdn.plot.ly/plotly-2.20.0.min.js" charset="utf-8"></script>
     <title>Document</title>
 </head>

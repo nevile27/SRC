@@ -12,16 +12,16 @@ function plot(X = [], y = [], xName) {
             var div = document.createElement('div');
             div.id = "tester"+j;
             p.appendChild(div);
-            $k = 0;
+            k = 0;
             X.forEach(x => {
                 data.push({
                     x:x,
                     y:el,
-                    name: xName[$k],
+                    name: xName[k],
                     type: 'bar',
                     orientation: 'h',
                 });
-                $k++;
+                k++;
             });
 
             var layout = { barmode: 'group', title: "Cliquez pour saisir le titre" };

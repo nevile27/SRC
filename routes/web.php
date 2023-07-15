@@ -37,3 +37,12 @@ Route::post('/histogramme_vertical', [DashController::class, 'dashVerticalHist']
 
 Route::get('/histogramme_horizontal', [DashController::class, 'dashHorizontalHist'])->name('seven');
 Route::post('/histogramme_horizontal', [DashController::class, 'dashHorizontalHist']);
+
+Route::get('/camamber', [DashController::class, 'dashCircle'])->name('height');
+Route::post('/camamber', [DashController::class, 'dashCircle']);
+
+Route::get('/nuage_de_points', [DashController::class, 'dashCloud'])->name('nine');
+Route::post('/nuage_de_points', [DashController::class, 'dashCloud']);
+
+Route::get('/courbes', [DashController::class, 'dashLinear'])->name('ten');
+Route::post('/courbes', [DashController::class, 'dashLinear']);
