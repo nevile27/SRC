@@ -5,14 +5,30 @@
 }
 
 table{
-    width: 100%;
-    padding: 5px 0;
+    padding: 0 0 5px 0;
     border-radius: 5px;
     box-shadow: 0px 0px 2px gray;
-    margin-bottom: 10px;
+    margin: 10px;
+    border-collapse: collapse;
+    background-color: white;
 }
-table tr{
-    
+table tr th{
+    padding: 5px;
+    color: white;
+    background-color: rgba(127, 127, 127, 1);
+    font-family: sans-serif;
+}
+table tr.head{
+    border-radius: 5px 5px 0 0;
+}
+table tr.head th:first-child{
+    border-radius: 5px 0 0 0;
+}
+table tr.head th:nth-last-child(1){
+    border-radius: 0 5px 0 0;
+}
+table tr th span{
+    font-weight: normal;
 }
 table tr td{
     padding: 5px 0px;
@@ -35,4 +51,14 @@ table tr td a{
 }
 .tr2{
 
+}
+
+@media screen and (max-width: 1240px) {
+    #visual{
+        width: 100%;
+        margin: 0 0 0 10px;
+    }
+    #param{
+        display: none;
+    }
 }

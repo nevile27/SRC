@@ -11,7 +11,6 @@
     <title>Document</title>
 </head>
 <body>
-    @include('header')
     @include('nav')
     <section>
         <div id="visual">
@@ -44,7 +43,6 @@
             </form>
         </div>
     </section>
-    @include('footer')
     <script src="{{asset('js/h_hist.js')}}"></script>
 </body>
 </html>

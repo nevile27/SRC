@@ -1,76 +1,29 @@
 <nav>
     <ul>
-        <li>
-            <div class="card">
-                <a href="{{ route('third') }}"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                <div class="container">
-                  <h4><b>John Doe</b></h4>
-                  <p>Architect & Engineer</p>
-                </div>
-            </div>
+        <li {{ ($route == 'third')? 'class=selected':'' }}>
+            <a href="{{ route('third') }}">Table</a>
         </li>
-        <li>
-            <div class="card">
-                <a href="{{ route('fourth') }}"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                <div class="container">
-                  <h4><b>John Doe</b></h4>
-                  <p>Architect & Engineer</p>
-                </div>
-            </div>
+        <li {{ ($route == 'ten')? 'class=selected':'' }}>
+            <a href="{{ route('ten') }}">Courbes</a>
         </li>
-        <li>
-            <div class="card">
-                <a href="{{ route('five') }}"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                <div class="container">
-                  <h4><b>John Doe</b></h4>
-                  <p>Architect & Engineer</p>
-                </div>
-            </div>
+        <li {{ ($route == 'nine')? 'class=selected':'' }}>
+            <a href="{{ route('nine') }}">Nuages</a>
         </li>
-        <li>
-            <div class="card">
-                <a href="{{ route('six') }}"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                <div class="container">
-                  <h4><b>John Doe</b></h4>
-                  <p>Architect & Engineer</p>
-                </div>
-            </div>
+        <li {{ ($route == 'eight')? 'class=selected':'' }}>
+            <a href="{{ route('eight') }}">Camambers</a>
         </li>
-        <li>
-            <div class="card">
-                <a href="{{ route('seven') }}"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                <div class="container">
-                  <h4><b>John Doe</b></h4>
-                  <p>Architect & Engineer</p>
-                </div>
-            </div>
+        <li {{ ($route == 'four')? 'class=selected':'' }}>
+            <a href="{{ route('four') }}">Batonnets V</a>
         </li>
-        <li>
-            <div class="card">
-                <a href="{{ route('height') }}"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                <div class="container">
-                  <h4><b>John Doe</b></h4>
-                  <p>Architect & Engineer</p>
-                </div>
-            </div>
+        <li {{ ($route == 'five')? 'class=selected':'' }}>
+            <a href="{{ route('five') }}">Batonnets H</a>
         </li>
-        <li>
-            <div class="card">
-                <a href="{{ route('nine') }}"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                <div class="container">
-                  <h4><b>John Doe</b></h4>
-                  <p>Architect & Engineer</p>
-                </div>
-            </div>
+        <li {{ ($route == 'six')? 'class=selected':'' }}>
+            <a href="{{ route('six') }}">Histogrammes V</a>
         </li>
-        <li>
-            <div class="card">
-                <a href="{{ route('ten') }}"><img src="{{ asset('images/camamber.png') }}" alt="Avatar" style="width:100%"></a>
-                <div class="container">
-                  <h4><b>John Doe</b></h4>
-                  <p>Architect & Engineer</p>
-                </div>
-            </div>
+        <li {{ ($route == 'seven')? 'class=selected':'' }}>
+            <a href="{{ route('seven') }}">Histogrammes H</a>
         </li>
     </ul>
+    <button> <a href="/">Accueil</a></button>
 </nav>

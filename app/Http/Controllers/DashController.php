@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Donnee;
 use App\Models\StatFunc;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
 class DashController extends Controller
@@ -13,6 +15,9 @@ class DashController extends Controller
     //Donnee
     public function dashTab()
     {
+        if(!Session::has('prefixe')){
+            return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
+        }
         $statFunc = new StatFunc();
         //$model = new ();
         $data = Donnee::all();
@@ -35,11 +40,15 @@ class DashController extends Controller
             'mins' => $mins,
             'moys' => $moys,
             'ects' => $ects,
+            'route' => 'third',
         ]);
     }
 
     public function dashVerticalStick(Request $request)
     {
+        if(!Session::has('prefixe')){
+            return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
+        }
         $statFunc = new StatFunc();
         //$model = new ();
         $data = Donnee::all();
@@ -87,11 +96,15 @@ class DashController extends Controller
             'mins' => $mins,
             'moys' => $moys,
             'ects' => $ects,
+            'route' => 'four',
         ]);
     }
 
     public function dashHorizontalStick(Request $request)
     {
+        if(!Session::has('prefixe')){
+            return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
+        }
         $statFunc = new StatFunc();
         //$model = new ();
         $data = Donnee::all();
@@ -131,11 +144,15 @@ class DashController extends Controller
             'mins' => $mins,
             'moys' => $moys,
             'ects' => $ects,
+            'route' => 'five',
         ]);
     }
 
     public function dashVerticalHist(Request $request)
     {
+        if(!Session::has('prefixe')){
+            return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
+        }
         $statFunc = new StatFunc();
         //$model = new ();
         $data = Donnee::all();
@@ -174,11 +191,15 @@ class DashController extends Controller
             'mins' => $mins,
             'moys' => $moys,
             'ects' => $ects,
+            'route' => 'six',
         ]);
     }
 
     public function dashHorizontalHist(Request $request)
     {
+        if(!Session::has('prefixe')){
+            return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
+        }
         $statFunc = new StatFunc();
         //$model = new ();
         $data = Donnee::all();
@@ -217,11 +238,15 @@ class DashController extends Controller
             'mins' => $mins,
             'moys' => $moys,
             'ects' => $ects,
+            'route' => 'seven',
         ]);
     }
 
     public function dashCircle(Request $request)
     {
+        if(!Session::has('prefixe')){
+            return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
+        }
         $statFunc = new StatFunc();
         //$model = new ();
         $data = Donnee::all();
@@ -261,6 +286,7 @@ class DashController extends Controller
             'mins' => $mins,
             'moys' => $moys,
             'ects' => $ects,
+            'route' => 'eight',
         ]);
     }
     

@@ -11,7 +11,6 @@
     <title>Document</title>
 </head>
 <body>
-    @include('header')
     @include('nav')
     <section>
         <div id="visual">
@@ -23,7 +22,7 @@
             </div>
         </div>
         <div id="param">
-            <form action="{{ route('fourth') }}" method="post" id="form_param">
+            <form action="{{ route('four') }}" method="post" id="form_param">
                 @csrf
                 <input type="hidden" name="h">
                 <div>
@@ -44,7 +43,6 @@
             </form>
         </div>
     </section>
-    @include('footer')
     <script src="{{asset('js/v_stick.js')}}"></script>
 </body>
 </html>

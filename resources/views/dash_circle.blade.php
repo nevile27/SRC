@@ -11,7 +11,6 @@
     <title>Document</title>
 </head>
 <body>
-    @include('header')
     @include('nav')
     <section>
         <div id="visual">
@@ -23,7 +22,7 @@
             </div>
         </div>
         <div id="param">
-            <form action="{{ route('height') }}" method="post" id="form_param">
+            <form action="{{ route('eight') }}" method="post" id="form_param">
                 @csrf
                 <input type="hidden" name="h">
                 <div>
@@ -44,7 +43,6 @@
             </form>
         </div>
     </section>
-    @include('footer')
     <script src="{{asset('js/circle.js')}}"></script>
 </body>
 </html>

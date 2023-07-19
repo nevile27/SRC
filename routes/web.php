@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\AnalyseController;
 use App\Http\Controllers\DashController;
+use App\Http\Controllers\ExportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,12 +24,17 @@ Route::post('/', [UploadController::class, 'verif_up']);
 Route::get('/extraction', [AnalyseController::class, 'dataExtract'])->name('first');
 Route::get('/rapport', [AnalyseController::class, 'dataPresentation'])->name('second');
 Route::get('/tableau', [DashController::class, 'dashTab'])->name('third');
-Route::get('/batonnet_vertical', [DashController::class, 'dashVerticalStick'])->name('fourth');
-Route::post('/batonnet_vertical', [DashController::class, 'dashVerticalStick']);
+Route::get('/sql', [ExportController::class, 'exportSQL'])->name('eleven');
+Route::get('/pdf', [ExportController::class, 'exportPDF'])->name('twelve');
+
 /*
 Route::resource('/ajax', 'VStickAjaxController',[VStickAjaxController::class]);
 Route::post('/ajax', [VStickAjaxController::class, 'dashVerticalStick']);
 */
+
+Route::get('/batonnet_vertical', [DashController::class, 'dashVerticalStick'])->name('four');
+Route::post('/batonnet_vertical', [DashController::class, 'dashVerticalStick']);
+
 Route::get('/batonnet_horizontal', [DashController::class, 'dashHorizontalStick'])->name('five');
 Route::post('/batonnet_horizontal', [DashController::class, 'dashHorizontalStick']);
 
@@ -38,7 +44,7 @@ Route::post('/histogramme_vertical', [DashController::class, 'dashVerticalHist']
 Route::get('/histogramme_horizontal', [DashController::class, 'dashHorizontalHist'])->name('seven');
 Route::post('/histogramme_horizontal', [DashController::class, 'dashHorizontalHist']);
 
-Route::get('/camamber', [DashController::class, 'dashCircle'])->name('height');
+Route::get('/camamber', [DashController::class, 'dashCircle'])->name('eight');
 Route::post('/camamber', [DashController::class, 'dashCircle']);
 
 Route::get('/nuage_de_points', [DashController::class, 'dashCloud'])->name('nine');

@@ -21,7 +21,7 @@ form{
     background: rgba(255, 2555, 255, 0.98);
     border-radius: 5px;
 }
-label{
+label,h2{
     padding: 10px 20px;
     border-radius: 4px;
     border: none;
@@ -45,11 +45,11 @@ button{
     padding: 10px 20px;
     border-radius: 4px;
     border: none;
-    background-color: rgba(127, 127, 127, 0.5);
+    background-color: red;
     font-size: large;
     font-family: Arial, Helvetica, sans-serif;
     cursor: pointer;
-    color: red;
+    color: white;
 }
 
 @keyframes adouss {

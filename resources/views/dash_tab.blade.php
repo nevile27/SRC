@@ -9,21 +9,25 @@
     <title>Document</title>
 </head>
 <body>
-    @include('header')
     @include('nav')
+    <div id="download">
+        <h2>Télécharger les données :</h2>
+        <button><a href="{{route('eleven')}}">format SQL</a></button>
+        <button><a href="{{route('twelve')}}">format PHP</a></button>
+    </div>
     <section>
         <div id="visual">
             <div id="v1">
                 <table>
-                    <tr id="head">
+                    <tr class="head">
                         <th> </th>
-                        @foreach ($colonnes as $item)
-                            <th>{{ $item }}</th>
+                        @foreach ($colonnes as $key => $item)
+                            <th>{{ $item }} <br> <span>({{ $types[$key] }})</span></th>
                         @endforeach
                     </tr>
                     @foreach ($data as $key => $ligne)
-                        <tr class="tr{{($key%2 == 0)? 1:2}}">
-                            <td>{{$key}}</td>
+                        <tr class="tr{{($key%2 != 0)? 1:2}}">
+                            <td>{{++$key}}</td>
                             @foreach ($colonnes as $item)
                                 <td>{{ $ligne[$item] }}</td>
                             @endforeach
@@ -33,7 +37,7 @@
             </div>
             <div id="v2">
                 <table>
-                    <tr>
+                    <tr class="head">
                         <th></th>
                         @foreach ($colonnes as $item)
                             <th>{{ $item }}</th>
@@ -61,7 +65,7 @@
         </div>
         <div id="param">
             <table>
-                <tr>
+                <tr class="head">
                     <th>Colonnes</th>
                     <th>Types detectés</th>
                 </tr>
@@ -74,6 +78,5 @@
             </table>
         </div>
     </section>
-    @include('footer')
 </body>
 </html>

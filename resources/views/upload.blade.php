@@ -22,6 +22,9 @@
                     <div id="error">{{ $error }}</div>
                 @endforeach
             @endif
+            @if (\Session::has('success') && \Session::get('success') == false)
+                <div id="error">{{ \Session::get('message') }}</div>
+            @endif
             <div>
                 <label for="file">
                     <i class="fa-solid fa-file-arrow-up fa-shake"></i> 
