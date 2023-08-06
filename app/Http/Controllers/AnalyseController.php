@@ -27,7 +27,6 @@ class AnalyseController extends Controller
         
         if ($data) {
             $prefix = Session::get('prefixe');
-            $param = ucfirst($prefix);
             if (Schema::hasTable($prefix."s")) {
                 Schema::drop($prefix."s");
                 $migs = scandir("..\\database\\migrations");
@@ -36,7 +35,7 @@ class AnalyseController extends Controller
                         $mig_name = $value;
                     }
                 }
-                $remove = system(storage_path('app\\shell\\') . 'remove.sh ' . $param .' '. $mig_name );
+                $remove = system(storage_path('app\\shell\\') . 'remove.sh '. $mig_name );
             }
 
             // Identification du type de données dans chaque colonnes 
@@ -46,8 +45,8 @@ class AnalyseController extends Controller
             Session::put('colonnes',$data[0]);
             Session::put('types',$types);
 
-            // Creation du fichier de migration et du fichier de model
-            $make_mig = system(storage_path('app\\shell\\') . 'maker.sh ' . $param);
+            // Creation du fichier de migration
+            $make_mig = system(storage_path('app\\shell\\') . 'maker.sh ' . $prefix);
 
             // Modification du fichier de migration 
             $migs = scandir("..\\database\\migrations");
@@ -105,38 +104,6 @@ class AnalyseController extends Controller
             fseek($mig_stream, 0);
             fwrite($mig_stream, $content);
             fclose($mig_stream);
-            
-
-            // Modification du fichier de model 
-            $model = file_get_contents("..\\app\\Models\\$param.php");
-            if ($model == false) {
-                $remove = system(storage_path('app\\shell\\') . 'remove.sh ' . $param .' '. $mig_name );
-                return view('error',['error'=>5]);
-            }
-            $pos = strrpos($model, "}");
-            $model_stream = fopen("..\\app\\Models\\$param.php", 'r+');
-            $content = fread($model_stream, $pos);
-            $content .= "\n\tprotected \$fillable = [";
-            foreach ($data[0] as  $value) {
-                $content .= "'" . $value . "',";
-            }
-            $content .= "];\n\n";
-            $content .= fread($model_stream, filesize("..\\app\\Models\\$param.php"));
-            fseek($model_stream, 0);
-            fwrite($model_stream, $content);
-            fclose($model_stream);
-
-            // Modification du fichier de control du dashboard
-            $controller = file_get_contents("..\\app\\Http\\Controllers\\DashController.php");
-            if ($controller == false) {
-                $remove = system(storage_path('app\\shell\\') . 'remove.sh ' . $param .' '. $mig_name );
-                return view('error',['error'=>0]);
-            }
-            $content = str_replace("DataType",$param,$controller);
-            $controller_stream = fopen("..\\app\\Http\\Controllers\\DashController.php", 'r+');
-            ftruncate($controller_stream,0);
-            fwrite($controller_stream, $content);
-            fclose($controller_stream);
 
             // Execution du fichier de migration, creation de la nouvelle table 
             $exec_migrate = system(storage_path('app\\shell\\') . 'migrate.sh');

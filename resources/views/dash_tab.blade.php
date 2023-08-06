@@ -29,7 +29,7 @@
                         <tr class="tr{{($key%2 != 0)? 1:2}}">
                             <td>{{++$key}}</td>
                             @foreach ($colonnes as $item)
-                                <td>{{ $ligne[$item] }}</td>
+                                <td>{{ $ligne->$item }}</td>
                             @endforeach
                         </tr>
                     @endforeach

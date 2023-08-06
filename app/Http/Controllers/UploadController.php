@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class UploadController extends Controller
 {
@@ -13,11 +13,19 @@ class UploadController extends Controller
         $request->validate([
             'fichier' => 'required|file|mimetypes:text/csv,text/plain|max:2000',
         ]);
-        // circonstance, élément, information, postulat, précision, principe, renseignement.
-        $prefix = "donnee";
+
+        $data = DB::table('sessions')->pluck('id')->toArray();
+        $prefixes = ["donnee", "circonstance", "element", "information", "postulat", "principe", "renseignement"];
+        foreach ($data as $key => $id) {
+            if($id == Session::getId()){
+                $prefix = $prefixes[$key];
+            }
+        }
+        
         $path = $request->file('fichier')->storeAs('csv', $prefix.'.csv', 'public');
         Session::put('chemin', $path);
         Session::put('prefixe', $prefix);
+        
         return view('upload',['path'=>$path]);
     }
 }

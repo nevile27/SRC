@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Donnee;
 use App\Models\StatFunc;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class DashController extends Controller
@@ -18,22 +15,23 @@ class DashController extends Controller
         if(!Session::has('prefixe')){
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
         }
-        $statFunc = new StatFunc();
-        //$model = new ();
-        $data = Donnee::all();
-        $types = Session::get('types');
+        $prefixe = Session::get('prefixe');
+        $data = DB::table($prefixe . 's');
         $colonnes = Session::get('colonnes');
+        $types = Session::get('types');
+
+        $statFunc = new StatFunc();
         $maxs = $mins = $moys = $ects = [];
         foreach ($types as $key => $type) {
             if (in_array($type, ['int', 'bigint', 'float', 'double', 'real', 'decimal'])) {
-                array_push($maxs, Donnee::max($colonnes[$key]));
-                array_push($mins, Donnee::min($colonnes[$key]));
-                array_push($moys, Donnee::avg($colonnes[$key]));
+                array_push($maxs, $data->max($colonnes[$key]));
+                array_push($mins, $data->min($colonnes[$key]));
+                array_push($moys, $data->avg($colonnes[$key]));
                 array_push($ects, $statFunc->ecarType($data->pluck($colonnes[$key])->toArray()));
             }
         }
         return view('dash_tab', [
-            'data' => $data,
+            'data' => $data->get()->toArray(),
             'colonnes' => $colonnes,
             'types' => $types,
             'maxs' => $maxs,
@@ -50,8 +48,8 @@ class DashController extends Controller
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
         }
         $statFunc = new StatFunc();
-        //$model = new ();
-        $data = Donnee::all();
+        $prefixe = Session::get('prefixe');
+        $data = DB::table($prefixe . 's');
         $types = Session::get('types');
         $colonnes = Session::get('colonnes');
         $maxs = $mins = $moys = $ects = [];
@@ -106,8 +104,8 @@ class DashController extends Controller
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
         }
         $statFunc = new StatFunc();
-        //$model = new ();
-        $data = Donnee::all();
+        $prefixe = Session::get('prefixe');
+        $data = DB::table($prefixe . 's');
         $types = Session::get('types');
         $colonnes = Session::get('colonnes');
         $maxs = $mins = $moys = $ects = [];
@@ -154,8 +152,8 @@ class DashController extends Controller
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
         }
         $statFunc = new StatFunc();
-        //$model = new ();
-        $data = Donnee::all();
+        $prefixe = Session::get('prefixe');
+        $data = DB::table($prefixe . 's');
         $types = Session::get('types');
         $colonnes = Session::get('colonnes');
         $maxs = $mins = $moys = $ects = [];
@@ -201,8 +199,8 @@ class DashController extends Controller
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
         }
         $statFunc = new StatFunc();
-        //$model = new ();
-        $data = Donnee::all();
+        $prefixe = Session::get('prefixe');
+        $data = DB::table($prefixe . 's');
         $types = Session::get('types');
         $colonnes = Session::get('colonnes');
         $maxs = $mins = $moys = $ects = [];
@@ -248,8 +246,8 @@ class DashController extends Controller
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
         }
         $statFunc = new StatFunc();
-        //$model = new ();
-        $data = Donnee::all();
+        $prefixe = Session::get('prefixe');
+        $data = DB::table($prefixe . 's');
         $types = Session::get('types');
         $colonnes = Session::get('colonnes');
         $maxs = $mins = $moys = $ects = [];
