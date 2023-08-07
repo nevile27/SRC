@@ -13,9 +13,16 @@ class AnalyseController extends Controller
 {
     public function dataExtract($delimiteur = ",")
     {
+        // Definition du separateur
+        if(strtoupper(substr(PHP_OS, 0, 3)) == "WIN"){
+            $s = "\\\\";
+        }else{
+            $s = "/";
+        }
+
         // Extraction des donnees du fichiers csv 
         $path = Session::get('chemin');
-        $flux = fopen(storage_path('app\\public\\' . $path), 'r');
+        $flux = fopen(storage_path('app'.$s.'public'. $s . $path), 'r');
         $i = 0;
         while (!feof($flux)) {
             $line = fgetcsv($flux);
@@ -29,13 +36,13 @@ class AnalyseController extends Controller
             $prefix = Session::get('prefixe');
             if (Schema::hasTable($prefix."s")) {
                 Schema::drop($prefix."s");
-                $migs = scandir("..\\database\\migrations");
+                $migs = scandir("..".$s."database".$s."migrations");
                 foreach ($migs as $value) {
                     if (str_contains($value, $prefix)) {
                         $mig_name = $value;
                     }
                 }
-                $remove = system(storage_path('app\\shell\\') . 'remove.sh '. $mig_name );
+                $remove = system(storage_path('app'.$s.'shell'. $s) . 'remove.sh '. $mig_name );
             }
 
             // Identification du type de données dans chaque colonnes 
@@ -46,22 +53,22 @@ class AnalyseController extends Controller
             Session::put('types',$types);
 
             // Creation du fichier de migration
-            $make_mig = system(storage_path('app\\shell\\') . 'maker.sh ' . $prefix);
+            $make_mig = system(storage_path('app'.$s.'shell'. $s) . 'maker.sh ' . $prefix);
 
             // Modification du fichier de migration 
-            $migs = scandir("..\\database\\migrations");
+            $migs = scandir("..".$s."database".$s."migrations");
             foreach ($migs as $value) {
                 if (str_contains($value, $prefix)) {
                     $mig_name = $value;
                 }
             }
             Session::put('migrations',$mig_name);/**/
-            $mig = file_get_contents("..\\database\\migrations\\" . $mig_name);
+            $mig = file_get_contents("..".$s."database".$s."migrations" . $s . $mig_name);
             if ($mig == false) {
                 return view('error',['error'=>3]);
             }
             $pos = strrpos($mig, "\$table->timestamps();");
-            $mig_stream = fopen("..\\database\\migrations\\" . $mig_name, 'r+');
+            $mig_stream = fopen("..".$s."database".$s."migrations" . $s. $mig_name, 'r+');
             if($mig_stream == false){
                 return view('error',['error'=>4]);
             }
@@ -100,13 +107,13 @@ class AnalyseController extends Controller
                         break;
                 }
             }
-            $content .= fread($mig_stream, filesize("..\\database\\migrations\\" . $mig_name));
+            $content .= fread($mig_stream, filesize("..".$s."database".$s."migrations" . $s . $mig_name));
             fseek($mig_stream, 0);
             fwrite($mig_stream, $content);
             fclose($mig_stream);
 
             // Execution du fichier de migration, creation de la nouvelle table 
-            $exec_migrate = system(storage_path('app\\shell\\') . 'migrate.sh');
+            $exec_migrate = system(storage_path('app'.$s.'shell'. $s) . 'migrate.sh');
 
             // Insertion des donnees du fichier csv dans la nouvelle table
             $inserts = [];

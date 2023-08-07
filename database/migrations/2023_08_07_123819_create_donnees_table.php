@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCirconstancesTable extends Migration
+class CreateDonneesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateCirconstancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('circonstances', function (Blueprint $table) {
+        Schema::create('donnees', function (Blueprint $table) {
             $table->id();
-            $table->string('cand');
-			$table->integer('raised_exp');
-			$table->integer('raised_act');
+            $table->string('country');
+			$table->integer('beer_servings');
+			$table->integer('spirit_servings');
+			$table->integer('wine_servings');
+			$table->float('total_litres_of_pure_alcohol');
 			$table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateCirconstancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('circonstances');
+        Schema::dropIfExists('donnees');
     }
 }

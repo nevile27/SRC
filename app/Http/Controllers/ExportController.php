@@ -16,10 +16,16 @@ class ExportController extends Controller
         if(!Session::has('prefixe')){
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
         }
+
+        if(strtoupper(substr(PHP_OS, 0, 3)) == "WIN"){
+            $s = "\\\\";
+        }else{
+            $s = "/";
+        }
+
         $prefix = Session::get('prefixe');
-        $exec_migrate = system(storage_path('app\\shell\\') . 'export.sh ' . $prefix . 's');
-        //DB::statement('SELECT * INTO OUTFILE "'.$path.'" FROM '.$prefix.'s');
-        return response()->download(storage_path('app\\public\\sql\\' . $prefix . 's.sql'));
+        $exec_migrate = system(storage_path('app'.$s.'shell'. $s) . 'export.sh ' . $prefix . 's');     //DB::statement('SELECT * INTO OUTFILE "'.$path.'" FROM '.$prefix.'s');
+        return response()->download(storage_path('app'.$s.'public'.$s.'sql'. $s . $prefix . 's.sql'));
     }
 
     public function exportPDF()
@@ -34,9 +40,10 @@ class ExportController extends Controller
         $data = DB::table($prefixe . 's');
         $types = Session::get('types');
         $colonnes = Session::get('colonnes');
-        $maxs = $mins = $moys = $ects = [];
+        $sums = $maxs = $mins = $moys = $ects = [];
         foreach ($types as $key => $type) {
             if (in_array($type, ['int', 'bigint', 'float', 'double', 'real', 'decimal'])) {
+                array_push($sums, $data->sum($colonnes[$key]));
                 array_push($maxs, $data->max($colonnes[$key]));
                 array_push($mins, $data->min($colonnes[$key]));
                 array_push($moys, $data->avg($colonnes[$key]));
@@ -47,6 +54,7 @@ class ExportController extends Controller
             'data' => $data->get()->toArray(),
             'colonnes' => $colonnes,
             'types' => $types,
+            'sums' => $sums,
             'maxs' => $maxs,
             'mins' => $mins,
             'moys' => $moys,
