@@ -87,9 +87,10 @@ section{
 }
 #v1{
     /*max-height: 600px;*/
+    padding-top: 10px;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     overflow-y: scroll;
     margin: 0 0 20px 0;
 }
@@ -105,12 +106,33 @@ section{
     background: rgba(127, 127, 127, 0.6);
     border-radius: 5px; 
 }
-#param{
-    align-content: center;
-    margin: 10px 10px 0 0;
-}
 #v2{
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+#param{
+    align-content: center;
+    margin: 10px 10px 0 0;
+}
+#param>form{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px gray;
+    margin: 10px;
+    background-color: white;
+}
+#param>form>button{
+    padding: 5px 10px;
+    margin: 10px auto;
+    border-radius: 20px;
+    border: none;
+    background-color: goldenrod;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    cursor: pointer;
 }

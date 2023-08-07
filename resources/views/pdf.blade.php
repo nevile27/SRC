@@ -75,6 +75,7 @@
                 <td>{{$types[$key]}}</td>
                 <td style="text-align: left; padding-left: 5px;">
                     @if (in_array($types[$key],['int','bigint','float','double','real','decimal']))
+                        Total: {{ $sums[$i] }}<br>
                         Min: {{ $mins[$i] }}<br>
                         Max: {{ $maxs[$i] }}<br>
                         Moy: {{ $moys[$i] }}<br>

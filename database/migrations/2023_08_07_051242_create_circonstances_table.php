@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDonneesTable extends Migration
+class CreateCirconstancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateDonneesTable extends Migration
      */
     public function up()
     {
-        Schema::create('donnees', function (Blueprint $table) {
+        Schema::create('circonstances', function (Blueprint $table) {
             $table->id();
-            $table->string('Country');
-			$table->float('Percent');
+            $table->string('cand');
+			$table->integer('raised_exp');
+			$table->integer('raised_act');
 			$table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateDonneesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donnees');
+        Schema::dropIfExists('circonstances');
     }
 }

@@ -127,15 +127,4 @@ class AnalyseController extends Controller
         return view('error',['error'=>8]);
     }
 
-    public function dataPresentation($options = 0)
-    {
-        $path = Session::get('chemin');
-        $flux = fopen(storage_path('app\\public\\' . $path), 'r');
-        $i = 0;
-        while (!feof($flux)) {
-            $data[$i] = fgetcsv($flux);
-            $i++;
-        }
-        return view('rapport', ['data' => $data]);
-    }
 }

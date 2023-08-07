@@ -26,7 +26,7 @@
                 @csrf
                 <input type="hidden" name="h">
                 <div>
-                    <h5>Abscisses</h5>
+                    <h5>Ordonnées</h5>
                     @foreach ($colonnes as $cle => $item)
                         <input type="checkbox" id="y{{ $cle }}" name="y{{ $cle }}" value="{{ $cle }}" {{(isset($x) && $cle == $x)? 'checked':''}}>
                         <label for="y{{ $cle }}">{{ $item }}</label><br>

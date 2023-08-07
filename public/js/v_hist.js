@@ -1,16 +1,37 @@
 function plot(X = [], xName = [], mode) {
     var data = [];
     i = 0;
-    X.forEach(x => {
-        data.push({
-            x: x,
-            name: xName[i],
-            type: 'histogram',
-        })
-        i++;
-    });
+    if(mode == "stack"){
+        X.forEach(x => {
+            data.push({
+                x: x,
+                name: xName[i],
+                type: 'histogram',
+            })
+            i++;
+        });
+    }else{
+        pas = 1/X.length;
+        op = 1;
+        X.forEach(x => {
+            data.push({
+                x: x,
+                opacity: op,
+                name: xName[i],
+                type: 'histogram',
+            })
+            op-=pas;
+            i++;
+        });
+    }
 
-    var layout = { barmode: mode, title: "Cliquez pour saisir le titre" };
+    var layout = {
+        barmode: mode,
+        bargap: 0.01, 
+        title: "Cliquez pour saisir le titre",
+        xaxis: {title: "Valeurs"},
+        yaxis: {title: "Nombre de valeurs"},
+    };
 
     Plotly.newPlot('tester', data, layout, { editable: true });
 }

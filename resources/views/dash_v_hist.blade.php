@@ -33,7 +33,7 @@
                     @endforeach
                 </div>-->
                 <div>
-                    <h5>Ordonnées</h5>
+                    <h5>Abscisses</h5>
                     @foreach ($colonnes as $cle => $item)
                         <input type="checkbox" id="x{{ $cle }}" name="x{{ $cle }}" value="{{ $cle }}" {{(isset($y) && $cle == $y)? 'checked':''}}>
                         <label for="x{{ $cle }}">{{ $item }}</label><br>

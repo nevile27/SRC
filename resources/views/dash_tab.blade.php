@@ -10,11 +10,6 @@
 </head>
 <body>
     @include('nav')
-    <div id="download">
-        <h2>Télécharger les données :</h2>
-        <button><a href="{{route('eleven')}}">format SQL</a></button>
-        <button><a href="{{route('twelve')}}">format PHP</a></button>
-    </div>
     <section>
         <div id="visual">
             <div id="v1">
@@ -47,8 +42,9 @@
                         <td></td>
                         <?php $i = 0;?>
                         @foreach ($colonnes as $key => $item)
-                            <td>
+                            <td style="text-align: start;padding: 5px;">
                                 @if (in_array($types[$key],['int','bigint','float','double','real','decimal']))
+                                    Total: {{ $sums[$i] }}<br>
                                     Min: {{ $mins[$i] }}<br>
                                     Max: {{ $maxs[$i] }}<br>
                                     Moy: {{ $moys[$i] }}<br>

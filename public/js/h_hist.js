@@ -12,7 +12,7 @@ function plot(Y = [], yName = [], mode) {
         });
     }else{
         pas = 1/Y.length;
-        op = pas;
+        op = 1;
         Y.forEach(y => {
             data.push({
                 y: y,
@@ -20,12 +20,18 @@ function plot(Y = [], yName = [], mode) {
                 name: yName[i],
                 type: 'histogram',
             })
-            op+=pas;
+            op-=pas;
             i++;
         });
     }
 
-    var layout = { barmode: mode, title: "Cliquez pour saisir le titre" };
+    var layout = {
+        barmode: mode,
+        bargap: 0.01,
+        title: "Cliquez pour saisir le titre",
+        yaxis: {title: "Valeurs"},
+        xaxis: {title: "Nombre de valeurs"},
+    };
 
     Plotly.newPlot('tester', data, layout, { editable: true });
 }
@@ -39,7 +45,7 @@ function loadData() {
     qry.setRequestHeader('X-CSRF-TOKEN', csrf.getAttribute('content'));
     qry.onreadystatechange = function () {
         if (qry.readyState == qry.DONE && qry.status == 200) {
-            alert(qry.response);
+            //alert(qry.response);
             var data = JSON.parse(qry.response);
             plot(data['y'], data['yName'], data['mode']);
         } else if (qry.readyState == qry.DONE && qry.status != 200) {

@@ -26,7 +26,7 @@
                 @csrf
                 <input type="hidden" name="h">
                 <div>
-                    <h5>Labels</h5>
+                    <h5>Référence</h5>
                     @foreach ($colonnes as $cle => $item)
                         <input type="radio" id="x" name="x" value="{{ $cle }}" {{(isset($x) && $cle == $x)? 'checked':''}}>
                         <label for="x">{{ $item }}</label><br>

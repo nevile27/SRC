@@ -21,9 +21,10 @@ class DashController extends Controller
         $types = Session::get('types');
 
         $statFunc = new StatFunc();
-        $maxs = $mins = $moys = $ects = [];
+        $sums = $maxs = $mins = $moys = $ects = [];
         foreach ($types as $key => $type) {
             if (in_array($type, ['int', 'bigint', 'float', 'double', 'real', 'decimal'])) {
+                array_push($sums, $data->sum($colonnes[$key]));
                 array_push($maxs, $data->max($colonnes[$key]));
                 array_push($mins, $data->min($colonnes[$key]));
                 array_push($moys, $data->avg($colonnes[$key]));
@@ -34,6 +35,7 @@ class DashController extends Controller
             'data' => $data->get()->toArray(),
             'colonnes' => $colonnes,
             'types' => $types,
+            'sums' => $sums,
             'maxs' => $maxs,
             'mins' => $mins,
             'moys' => $moys,
@@ -47,12 +49,11 @@ class DashController extends Controller
         if(!Session::has('prefixe')){
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
         }
-        $statFunc = new StatFunc();
         $prefixe = Session::get('prefixe');
         $data = DB::table($prefixe . 's');
         $types = Session::get('types');
         $colonnes = Session::get('colonnes');
-        $maxs = $mins = $moys = $ects = [];
+        
         $xData = $yData = [];
         if ($request->has('h')) {
             $x = $request->x;
@@ -75,25 +76,9 @@ class DashController extends Controller
                 'yName' => $yName,
             ];
             return response()->json($rep); //->withCallback($request->input('callback'))
-        } else {
-            /*
-                x
-                foreach ($types as $key => $type) {
-                    if (in_array($type, ['int', 'bigint', 'float', 'double', 'real', 'decimal'])) {
-                        array_push($y, $key);
-                        break;
-                    }
-                }
-            */
         }
         return view('dash_v_stick', [
-            'data' => $data,
             'colonnes' => $colonnes,
-            'types' => $types,
-            'maxs' => $maxs,
-            'mins' => $mins,
-            'moys' => $moys,
-            'ects' => $ects,
             'route' => 'four',
         ]);
     }
@@ -103,12 +88,11 @@ class DashController extends Controller
         if(!Session::has('prefixe')){
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
         }
-        $statFunc = new StatFunc();
         $prefixe = Session::get('prefixe');
         $data = DB::table($prefixe . 's');
         $types = Session::get('types');
         $colonnes = Session::get('colonnes');
-        $maxs = $mins = $moys = $ects = [];
+        
         $xData = $yData = [];
         if ($request->has('h')) {
             $y = $request->y;
@@ -131,17 +115,9 @@ class DashController extends Controller
                 'xName' => $xName,
             ];
             return response()->json($rep); //->withCallback($request->input('callback'))
-        } else {
-            
         }
         return view('dash_h_stick', [
-            'data' => $data,
             'colonnes' => $colonnes,
-            'types' => $types,
-            'maxs' => $maxs,
-            'mins' => $mins,
-            'moys' => $moys,
-            'ects' => $ects,
             'route' => 'five',
         ]);
     }
@@ -151,12 +127,11 @@ class DashController extends Controller
         if(!Session::has('prefixe')){
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
         }
-        $statFunc = new StatFunc();
         $prefixe = Session::get('prefixe');
         $data = DB::table($prefixe . 's');
         $types = Session::get('types');
         $colonnes = Session::get('colonnes');
-        $maxs = $mins = $moys = $ects = [];
+
         $xData = $yData = [];
         if ($request->has('h')) {
             $x = [];
@@ -178,17 +153,9 @@ class DashController extends Controller
                 'mode' => $mode,
             ];
             return response()->json($rep); //->withCallback($request->input('callback'))
-        } else {
-            
         }
         return view('dash_v_hist', [
-            'data' => $data,
             'colonnes' => $colonnes,
-            'types' => $types,
-            'maxs' => $maxs,
-            'mins' => $mins,
-            'moys' => $moys,
-            'ects' => $ects,
             'route' => 'six',
         ]);
     }
@@ -198,12 +165,11 @@ class DashController extends Controller
         if(!Session::has('prefixe')){
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
         }
-        $statFunc = new StatFunc();
         $prefixe = Session::get('prefixe');
         $data = DB::table($prefixe . 's');
         $types = Session::get('types');
         $colonnes = Session::get('colonnes');
-        $maxs = $mins = $moys = $ects = [];
+        
         $xData = $yData = [];
         if ($request->has('h')) {
             $y = [];
@@ -225,17 +191,9 @@ class DashController extends Controller
                 'mode' => $mode,
             ];
             return response()->json($rep); //->withCallback($request->input('callback'))
-        } else {
-            
         }
-        return view('dash_v_hist', [
-            'data' => $data,
+        return view('dash_h_hist', [
             'colonnes' => $colonnes,
-            'types' => $types,
-            'maxs' => $maxs,
-            'mins' => $mins,
-            'moys' => $moys,
-            'ects' => $ects,
             'route' => 'seven',
         ]);
     }
@@ -245,12 +203,11 @@ class DashController extends Controller
         if(!Session::has('prefixe')){
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
         }
-        $statFunc = new StatFunc();
         $prefixe = Session::get('prefixe');
         $data = DB::table($prefixe . 's');
         $types = Session::get('types');
         $colonnes = Session::get('colonnes');
-        $maxs = $mins = $moys = $ects = [];
+
         $xData = $yData = [];
         if ($request->has('h')) {
             $x = $request->x;
@@ -273,28 +230,91 @@ class DashController extends Controller
                 'yName' => $yName,
             ];
             return response()->json($rep); //->withCallback($request->input('callback'))
-        } else {
-            
         }
         return view('dash_circle', [
-            'data' => $data,
             'colonnes' => $colonnes,
-            'types' => $types,
-            'maxs' => $maxs,
-            'mins' => $mins,
-            'moys' => $moys,
-            'ects' => $ects,
             'route' => 'eight',
         ]);
     }
     
     public function dashCloud(Request $request)
     {
-        # code...
+        if(!Session::has('prefixe')){
+            return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
+        }
+        $prefixe = Session::get('prefixe');
+        $data = DB::table($prefixe . 's');
+        $types = Session::get('types');
+        $colonnes = Session::get('colonnes');
+
+        $xData = $yData = [];
+        if ($request->has('h')) {
+            $x = $request->x;
+            $y = [];
+            $yName = [];
+            $inputs = $request->input();
+            foreach ($inputs as $key => $input) {
+                if(str_contains($key,'y')){
+                    array_push($y,$request->input($key));
+                    array_push($yName,$colonnes[$input]);
+                }
+            }
+            foreach ($y as $val) {
+                array_push($yData,$data->pluck($colonnes[$val])->toArray());
+            }
+            $xData = $data->pluck($colonnes[$x])->toArray();
+            $rep = [
+                'x' => $xData,
+                'y' => $yData,
+                'yName' => $yName,
+                'mode' => $request->mode,
+            ];
+            return response()->json($rep); //->withCallback($request->input('callback'))
+        }
+        return view('dash_cloud', [
+            'colonnes' => $colonnes,
+            'route' => 'nine',
+        ]);
     }
     
     public function dashLinear(Request $request)
     {
-        # code...
+        if(!Session::has('prefixe')){
+            return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
+        }
+        $prefixe = Session::get('prefixe');
+        $data = DB::table($prefixe . 's');
+        $types = Session::get('types');
+        $colonnes = Session::get('colonnes');
+        
+        $xData = $yData = [];
+        if ($request->has('h')) {
+            $x = $request->x;
+            $y = [];
+            $yName = [];
+            $inputs = $request->input();
+            foreach ($inputs as $key => $input) {
+                if(str_contains($key,'y')){
+                    array_push($y,$request->input($key));
+                    array_push($yName,$colonnes[$input]);
+                }
+            }
+            foreach ($y as $val) {
+                array_push($yData,$data->pluck($colonnes[$val])->toArray());
+            }
+            $xData = $data->pluck($colonnes[$x])->toArray();
+            $rep = [
+                'x' => $xData,
+                'y' => $yData,
+                'yName' => $yName,
+                'mode' => $request->mode,
+                'forme' => $request->forme,
+            ];
+            return response()->json($rep); //->withCallback($request->input('callback'))
+        }
+        return view('dash_linear', [
+            'colonnes' => $colonnes,
+            'route' => 'ten',
+        ]);
     }
 }
