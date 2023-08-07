@@ -15,7 +15,7 @@ class AnalyseController extends Controller
     {
         // Definition du separateur
         if(strtoupper(substr(PHP_OS, 0, 3)) == "WIN"){
-            $s = "\\\\";
+            $s = "\\";
         }else{
             $s = "/";
         }
@@ -42,7 +42,7 @@ class AnalyseController extends Controller
                         $mig_name = $value;
                     }
                 }
-                $remove = system(storage_path('app'.$s.'shell'. $s) . 'remove.sh '. $mig_name );
+                $remove = ($mig_name) ? system(storage_path('app'.$s.'shell'. $s) . 'remove.sh '. $mig_name ) : false;
             }
 
             // Identification du type de données dans chaque colonnes 
