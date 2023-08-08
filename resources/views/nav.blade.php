@@ -53,6 +53,6 @@
         @default
             <h2>Télécharger les données :</h2>
             <button><a href="{{route('eleven')}}">format SQL</a></button>
-            <button><a href="{{route('twelve')}}">format PHP</a></button>  
+            <button><a href="{{route('twelve')}}">format PDF</a></button>  
     @endswitch
 </div>

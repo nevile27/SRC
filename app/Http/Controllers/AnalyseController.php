@@ -42,7 +42,7 @@ class AnalyseController extends Controller
                         $mig_name = $value;
                     }
                 }
-                $remove = ($mig_name) ? system(storage_path('app'.$s.'shell'. $s) . 'remove.sh '. $mig_name ) : false;
+                $remove = system(storage_path('app'.$s.'shell'. $s) . 'remove.sh '. $mig_name );
             }
 
             // Identification du type de données dans chaque colonnes 
