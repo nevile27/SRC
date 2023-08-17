@@ -28,7 +28,7 @@ class ExportController extends Controller
         return response()->download(storage_path('app'.$s.'public'.$s.'sql'. $s . $prefix . 's.sql'));
     }
 
-    public function exportPDF()
+    public function exportPDF(Request $request)
     {
         if(!Session::has('prefixe')){
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
@@ -40,6 +40,8 @@ class ExportController extends Controller
         $data = DB::table($prefixe . 's');
         $types = Session::get('types');
         $colonnes = Session::get('colonnes');
+        $colonne = ($request->colonne) ? $request->colonne:'id';
+        $ordre = ($request->ordre) ? $request->ordre:'asc';
         $sums = $maxs = $mins = $moys = $ects = [];
         foreach ($types as $key => $type) {
             if (in_array($type, ['int', 'bigint', 'float', 'double', 'real', 'decimal'])) {
@@ -59,6 +61,8 @@ class ExportController extends Controller
             'mins' => $mins,
             'moys' => $moys,
             'ects' => $ects,
+            'colonne' => $colonne,
+            'ordre' => $ordre,
         ])->render();
         ob_end_clean();
         include_once('.././vendor/autoload.php');

@@ -17,18 +17,42 @@
                     <tr class="head">
                         <th> </th>
                         @foreach ($colonnes as $key => $item)
-                            <th>{{ $item }} <br> <span>({{ $types[$key] }})</span></th>
+                            @if ($colonne != $item)
+                                <th><a href="{{route('third')}}?colonne={{$item}}&ordre=asc&debut={{$debut}}">{{ $item }} <br> <span>({{ $types[$key] }})</span></a></th>
+                            @else
+                                @if ($ordre == "asc")
+                                    <th><a href="{{route('third')}}?colonne={{$item}}&ordre=desc&debut={{$debut}}">{{ $item }} <br> <span>({{ $types[$key] }}) &#x2191;</span></a></th>  
+                                @else
+                                    <th><a href="{{route('third')}}?colonne={{$item}}&ordre=asc&debut={{$debut}}">{{ $item }} <br> <span>({{ $types[$key] }}) &#x2193;</span></a></th>
+                                @endif
+                            @endif
                         @endforeach
                     </tr>
                     @foreach ($data as $key => $ligne)
                         <tr class="tr{{($key%2 != 0)? 1:2}}">
-                            <td>{{++$key}}</td>
+                            <td>{{++$key + $debut}}</td>
                             @foreach ($colonnes as $item)
                                 <td>{{ $ligne->$item }}</td>
                             @endforeach
                         </tr>
                     @endforeach
                 </table>
+            </div>
+            <div id="pgnt">
+                <p id="pagination">
+                    <a href="{{route('third')}}?colonne={{$colonne}}&ordre={{$ordre}}&debut=<?=(0 <= $debut-$limit)? ($debut-$limit):$debut?>">&laquo;</a>
+                    <?php
+                        $i = ceil($compte/$limit);
+                        for ($j=0; $j < $i; $j++) { 
+                            if($debut==$j*$limit){
+                                echo '<a href="'.route('third').'?colonne='.$colonne.'&ordre='.$ordre.'&debut='.$j*$limit.'" class="active">'.($j+1).'</a>';
+                            }else{
+                                echo '<a href="'.route('third').'?colonne='.$colonne.'&ordre='.$ordre.'&debut='.$j*$limit.'">'.($j+1).'</a>';
+                            }
+                        } 
+                    ?>
+                    <a href="{{route('third')}}?colonne={{$colonne}}&ordre={{$ordre}}&debut=<?=($compte > $debut+$limit)? ($debut+$limit):$debut?>">&raquo;</a>
+                </p>
             </div>
             <div id="v2">
                 <table>

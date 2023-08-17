@@ -10,8 +10,49 @@
 </head>
 <body>
     @isset($path)
-        <form action="{{ route('first') }}">
-            <h2>Fichier enregistré</h2>
+        <form action="{{ route('first') }}" id="f1">
+            
+            <h3>Définnissez les paramettres d'annalyse :</h3>
+            <div>
+                <div>
+                    <label for="spec1">Séparateur : </label><br/>
+            <select name="spec1" class="opt">
+                <option value="1">Espace ( )</option>
+                <option value="2"selected>Virgule (,)</option>
+                <option value="3">Point virgule (;)</option>
+            </select>
+                </div>
+            <div>
+                <label for="spec2">Encadrement du texte : </label><br/>
+            <select name="spec2" class="opt">
+                <option value="5" selected>Aucun ( )</option>
+                <option value="4">Griffes (')</option>
+                <option value="5">Double griffes (")</option>
+            </select>
+            </div>
+            <div>
+                <label for="spec3">Fin de ligne : </label><br/>
+            <select name="spec3" class="opt">
+                <option value="7">Aucun ( )</option>
+                <option value="2">Virgule (,)</option>
+                <option value="3">Point virgule (;)</option>
+                <option value="4">Griffes (')</option>
+                <option value="5">Double griffes (")</option>
+                <option value="6">Slash (/)</option>
+                <option value="7">Anti-slash (\)</option>
+            </select>
+            </div>
+            <div>
+                <label for="spec4">Typage des données : </label><br/>
+            <select name="spec4" class="opt">
+                <option value="20">20 lignes</option>
+                <option value="100">100 lignes</option>
+                <option value="200">200 lignes</option>
+                <option value="500">500 lignes</option>
+                <option value="0">Toutes les lignes</option>
+            </select>
+            </div>
+            </div>
             <button>ANALYSER LES DONNEES</button>
         </form>
     @else

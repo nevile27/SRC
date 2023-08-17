@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 class DashController extends Controller
 {
     //Donnee
-    public function dashTab()
+    public function dashTab(Request $request)
     {
         if(!Session::has('prefixe')){
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
@@ -19,6 +19,10 @@ class DashController extends Controller
         $data = DB::table($prefixe . 's');
         $colonnes = Session::get('colonnes');
         $types = Session::get('types');
+        $colonne = ($request->colonne) ? $request->colonne:'id';
+        $ordre = ($request->ordre) ? $request->ordre:'asc';
+        $debut = ($request->debut) ? $request->debut:0;
+        $limit = ($request->limit) ? $request->limit:500;
 
         $statFunc = new StatFunc();
         $sums = $maxs = $mins = $moys = $ects = [];
@@ -32,7 +36,7 @@ class DashController extends Controller
             }
         }
         return view('dash_tab', [
-            'data' => $data->get()->toArray(),
+            'data' => $data->orderBy($colonne, $ordre)->offset($debut)->limit($limit)->get()->toArray(),
             'colonnes' => $colonnes,
             'types' => $types,
             'sums' => $sums,
@@ -40,6 +44,11 @@ class DashController extends Controller
             'mins' => $mins,
             'moys' => $moys,
             'ects' => $ects,
+            'colonne' => $colonne,
+            'ordre' => $ordre,
+            'debut' => $debut,
+            'limit' => $limit,
+            'compte' => $data->getCountForPagination(['id']),
             'route' => 'third',
         ]);
     }

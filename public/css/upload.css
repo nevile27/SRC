@@ -12,7 +12,7 @@ body{
 }
 form{
     display: flex;
-    width: 500px;
+    width: 600px;
     height: 300px;
     flex-direction: column;
     justify-content: space-evenly;
@@ -39,6 +39,39 @@ button{
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
+    cursor: pointer;
+}
+#f1>div{
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+#f1 label{
+    padding: 0;
+    border-radius: 4px;
+    border: none;
+    background-color: transparent;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+#f1 select{
+    padding: 5px;
+    border-radius: 5px;
+    font-style: italic;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h3{
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    background-color: rgba(127, 127, 127, 0.5);
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
     cursor: pointer;
 }
 #error{

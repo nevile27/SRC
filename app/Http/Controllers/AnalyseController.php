@@ -11,7 +11,7 @@ use App\Models\DataType;
 
 class AnalyseController extends Controller
 {
-    public function dataExtract($delimiteur = ",")
+    public function dataExtract(Request $request)
     {
         // Definition du separateur
         if(strtoupper(substr(PHP_OS, 0, 3)) == "WIN"){
@@ -21,11 +21,16 @@ class AnalyseController extends Controller
         }
 
         // Extraction des donnees du fichiers csv 
+
+        $chars = [NULL," ",",",";","'","\"","/","\\"];
+        $delimiteur = $chars[$request->spec1];
+        $encadrement = $chars[$request->spec2];
+        $echappement = $chars[$request->spec3];
         $path = Session::get('chemin');
         $flux = fopen(storage_path('app'.$s.'public'. $s . $path), 'r');
         $i = 0;
         while (!feof($flux)) {
-            $line = fgetcsv($flux);
+            $line = fgetcsv($flux,null,$delimiteur,$encadrement,$echappement);
             if($line){
                 $data[$i] = $line;
                 $i++;
@@ -47,10 +52,12 @@ class AnalyseController extends Controller
 
             // Identification du type de données dans chaque colonnes 
             $dataTypes = new DataType;
-            $types = $dataTypes->dType($data);
+            $types = $dataTypes->dType($data,$request->spec4);
 
             Session::put('colonnes',$data[0]);
             Session::put('types',$types);
+
+            //dd([$types,$data]);
 
             // Creation du fichier de migration
             $make_mig = system(storage_path('app'.$s.'shell'. $s) . 'maker.sh ' . $prefix);
@@ -96,11 +103,17 @@ class AnalyseController extends Controller
                     case 'text':
                         $content .= "\$table->text('" . $value . "');\n\t\t\t";
                         break;
+                    case 'time':
+                        $content .= "\$table->time('" . $value . "');\n\t\t\t";
+                        break;
+                    case 'date':
+                        $content .= "\$table->date('" . $value . "');\n\t\t\t";
+                        break;
+                    case 'dateTime':
+                        $content .= "\$table->dateTime('" . $value . "');\n\t\t\t";
+                        break;
                     case 'timestamp':
                         $content .= "\$table->timestamp('" . $value . "');\n\t\t\t";
-                        break;
-                    case 'null':
-                        $content .= "\$table->string('" . $value . "');\n\t\t\t";
                         break;
                     default:
                         $content .= "\$table->string('" . $value . "');\n\t\t\t";
