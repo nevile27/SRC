@@ -5,6 +5,7 @@ function plot(X = [], y = [], xName) {
         for (let i = 0; i < y.length; i=i+15) {
             Y.push(y.slice(i,i+15));
         }
+        i = 0;
         j = 1;
         var p = document.getElementById('v1');
         p.innerHTML = "";
@@ -14,6 +15,7 @@ function plot(X = [], y = [], xName) {
             p.appendChild(div);
             k = 0;
             X.forEach(x => {
+                x = x.slice(i,i+15);
                 data.push({
                     x:x,
                     y:el,
@@ -28,6 +30,7 @@ function plot(X = [], y = [], xName) {
 
             Plotly.newPlot('tester'+j, data, layout, { editable: true });
             data = [];
+            i=i+15;
             j++;
         });
     }else{

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use App\Models\DataType;
@@ -41,13 +40,16 @@ class AnalyseController extends Controller
             $prefix = Session::get('prefixe');
             if (Schema::hasTable($prefix."s")) {
                 Schema::drop($prefix."s");
-                $migs = scandir("..".$s."database".$s."migrations");
-                foreach ($migs as $value) {
-                    if (str_contains($value, $prefix)) {
-                        $mig_name = $value;
+            }
+            $migs = scandir("..".$s."database".$s."migrations");
+            foreach ($migs as $value) {
+                if (str_contains($value, $prefix)) {
+                    $remove = system(storage_path('app'.$s.'shell'. $s) . 'remove.sh '. $value );
+                    if($remove === false){
+                        return view('error',['error'=>1]);
                     }
+                    break;
                 }
-                $remove = system(storage_path('app'.$s.'shell'. $s) . 'remove.sh '. $mig_name );
             }
 
             // Identification du type de données dans chaque colonnes 
@@ -57,10 +59,11 @@ class AnalyseController extends Controller
             Session::put('colonnes',$data[0]);
             Session::put('types',$types);
 
-            //dd([$types,$data]);
-
             // Creation du fichier de migration
             $make_mig = system(storage_path('app'.$s.'shell'. $s) . 'maker.sh ' . $prefix);
+            if($make_mig === false){
+                return view('error',['error'=>2]);
+            }
 
             // Modification du fichier de migration 
             $migs = scandir("..".$s."database".$s."migrations");
@@ -69,7 +72,7 @@ class AnalyseController extends Controller
                     $mig_name = $value;
                 }
             }
-            Session::put('migrations',$mig_name);/**/
+            //Session::put('migrations',$mig_name);
             $mig = file_get_contents("..".$s."database".$s."migrations" . $s . $mig_name);
             if ($mig == false) {
                 return view('error',['error'=>3]);
@@ -81,6 +84,9 @@ class AnalyseController extends Controller
             }
             $content = fread($mig_stream, $pos);
             foreach ($data[0] as $key => $value) {
+                if($value == 'id'){
+                    continue;
+                }
                 switch ($types[$key]) {
                     case 'int':
                         $content .= "\$table->integer('" . $value . "');\n\t\t\t";

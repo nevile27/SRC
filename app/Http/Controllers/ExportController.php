@@ -33,10 +33,9 @@ class ExportController extends Controller
         if(!Session::has('prefixe')){
             return Redirect('/')->with(["success" => false, "message" => "Votre session a expirée"]);
         }
-        $prefix = Session::get('prefixe');
+        $prefixe = Session::get('prefixe');
         ob_start();
         $statFunc = new StatFunc();
-        $prefixe = Session::get('prefixe');
         $data = DB::table($prefixe . 's');
         $types = Session::get('types');
         $colonnes = Session::get('colonnes');
@@ -53,7 +52,7 @@ class ExportController extends Controller
             }
         }
         $html = view('pdf', [
-            'data' => $data->get()->toArray(),
+            'data' => $data->orderBy($colonne, $ordre)->get()->toArray(),
             'colonnes' => $colonnes,
             'types' => $types,
             'sums' => $sums,
@@ -65,20 +64,17 @@ class ExportController extends Controller
             'ordre' => $ordre,
         ])->render();
         ob_end_clean();
+
         include_once('.././vendor/autoload.php');
         $options = new Options();
         $options->set('isRemoteEnabled',true);
         $options->set('chroot',realpath(''));
-
         $dompdf = new Dompdf($options);
-
         $dompdf->loadHtml($html);
-
-        $dompdf->setPaper('A4','portrait');
-
+        $dompdf->setPaper('A4','landscape');
         $dompdf->render();
 
-        $fichier = $prefix . 's.pdf';
+        $fichier = $prefixe . 's.pdf';
 
         $dompdf->stream($fichier);
 

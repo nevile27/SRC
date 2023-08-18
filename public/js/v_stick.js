@@ -5,6 +5,7 @@ function plot(x = [], Y = [], yName) {
         for (let i = 0; i < x.length; i=i+50) {
             X.push(x.slice(i,i+50));
         }
+        i = 0;
         j = 1;
         var p = document.getElementById('v1');
         p.innerHTML = "";
@@ -12,21 +13,23 @@ function plot(x = [], Y = [], yName) {
             var div = document.createElement('div');
             div.id = "tester"+j;
             p.appendChild(div);
-            $k = 0;
+            k = 0;
             Y.forEach(y => {
+                y = y.slice(i,i+50);
                 data.push({
                     x:el,
                     y:y,
-                    name: yName[$k],
+                    name: yName[k],
                     type: 'bar',
                 });
-                $k++;
+                k++;
             });
 
             var layout = { barmode: 'group', title: "Cliquez pour saisir le titre" };
 
             Plotly.newPlot('tester'+j, data, layout, { editable: true });
             data = [];
+            i=i+50;
             j++;
         });
     }else{

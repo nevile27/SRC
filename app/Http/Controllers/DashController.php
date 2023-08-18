@@ -84,7 +84,7 @@ class DashController extends Controller
                 'y' => $yData,
                 'yName' => $yName,
             ];
-            return response()->json($rep); //->withCallback($request->input('callback'))
+            return response()->json($rep);
         }
         return view('dash_v_stick', [
             'colonnes' => $colonnes,
@@ -123,7 +123,7 @@ class DashController extends Controller
                 'y' => $yData,
                 'xName' => $xName,
             ];
-            return response()->json($rep); //->withCallback($request->input('callback'))
+            return response()->json($rep);
         }
         return view('dash_h_stick', [
             'colonnes' => $colonnes,
@@ -161,7 +161,7 @@ class DashController extends Controller
                 'xName' => $xName,
                 'mode' => $mode,
             ];
-            return response()->json($rep); //->withCallback($request->input('callback'))
+            return response()->json($rep);
         }
         return view('dash_v_hist', [
             'colonnes' => $colonnes,
@@ -199,7 +199,7 @@ class DashController extends Controller
                 'yName' => $yName,
                 'mode' => $mode,
             ];
-            return response()->json($rep); //->withCallback($request->input('callback'))
+            return response()->json($rep);
         }
         return view('dash_h_hist', [
             'colonnes' => $colonnes,
@@ -238,7 +238,7 @@ class DashController extends Controller
                 'y' => $yData,
                 'yName' => $yName,
             ];
-            return response()->json($rep); //->withCallback($request->input('callback'))
+            return response()->json($rep);
         }
         return view('dash_circle', [
             'colonnes' => $colonnes,
@@ -278,7 +278,7 @@ class DashController extends Controller
                 'yName' => $yName,
                 'mode' => $request->mode,
             ];
-            return response()->json($rep); //->withCallback($request->input('callback'))
+            return response()->json($rep);
         }
         return view('dash_cloud', [
             'colonnes' => $colonnes,
@@ -319,7 +319,7 @@ class DashController extends Controller
                 'mode' => $request->mode,
                 'forme' => $request->forme,
             ];
-            return response()->json($rep); //->withCallback($request->input('callback'))
+            return response()->json($rep);
         }
         return view('dash_linear', [
             'colonnes' => $colonnes,
