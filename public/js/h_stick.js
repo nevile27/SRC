@@ -53,9 +53,10 @@ plot();
 function loadData() {
     var qry = new XMLHttpRequest(),
         csrf = document.querySelector("meta[name='csrf-token']"),
+        hote = document.querySelector("input[name='hote']"),
         form = document.getElementById("form_param"),
         formd = new FormData(form);
-    qry.open('POST', "http://localhost:8000/batonnet_horizontal");
+    qry.open('POST', hote.value + "/batonnet_horizontal");
     qry.setRequestHeader('X-CSRF-TOKEN',csrf.getAttribute('content'));
     qry.onreadystatechange = function(){
         if(qry.readyState == qry.DONE && qry.status == 200){

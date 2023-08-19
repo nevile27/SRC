@@ -37,6 +37,14 @@ class AnalyseController extends Controller
         }
         
         if ($data) {
+            // Identification du type de données dans chaque colonnes 
+            $dataTypes = new DataType;
+            $types = $dataTypes->dType($data,$request->spec4);
+
+            Session::put('colonnes',$data[0]);
+            Session::put('types',$types);
+
+            // Suppression de la configuration existante
             $prefix = Session::get('prefixe');
             if (Schema::hasTable($prefix."s")) {
                 Schema::drop($prefix."s");
@@ -52,13 +60,6 @@ class AnalyseController extends Controller
                 }
             }
 
-            // Identification du type de données dans chaque colonnes 
-            $dataTypes = new DataType;
-            $types = $dataTypes->dType($data,$request->spec4);
-
-            Session::put('colonnes',$data[0]);
-            Session::put('types',$types);
-
             // Creation du fichier de migration
             $make_mig = system(storage_path('app'.$s.'shell'. $s) . 'maker.sh ' . $prefix);
             if($make_mig === false){
@@ -72,7 +73,6 @@ class AnalyseController extends Controller
                     $mig_name = $value;
                 }
             }
-            //Session::put('migrations',$mig_name);
             $mig = file_get_contents("..".$s."database".$s."migrations" . $s . $mig_name);
             if ($mig == false) {
                 return view('error',['error'=>3]);
