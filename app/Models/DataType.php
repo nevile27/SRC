@@ -107,7 +107,7 @@ class DataType {
     {
         if (is_numeric($var)) {
             if(is_int(1+$var)){
-                if(strlen((string)abs($var))>10){
+                if(strlen((string)abs($var))>9){
                     return "bigint";
                 }
                 return "int";
