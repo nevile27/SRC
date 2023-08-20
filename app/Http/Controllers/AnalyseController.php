@@ -133,6 +133,9 @@ class AnalyseController extends Controller
 
             // Execution du fichier de migration, creation de la nouvelle table 
             $exec_migrate = system(storage_path('app'.$s.'shell'. $s) . 'migrate.sh');
+            if($exec_migrate === false){
+                return view('error',['error'=>6]);
+            }
 
             // Insertion des donnees du fichier csv dans la nouvelle table
             $inserts = [];
