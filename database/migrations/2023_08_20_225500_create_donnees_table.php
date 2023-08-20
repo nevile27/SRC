@@ -20,9 +20,9 @@ class CreateDonneesTable extends Migration
 			$table->string('lastname');
 			$table->string('firstname');
 			$table->integer('articleNum');
-			$table->string('birthDate');
-			$table->string('birthMonth');
-			$table->string('birthDay');
+			$table->date('birthDate');
+			$table->integer('birthMonth');
+			$table->integer('birthDay');
 			$table->string('zodiac');
 			$table->timestamps();
         });

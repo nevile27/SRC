@@ -38,7 +38,10 @@ class AnalyseController extends Controller
         }
         
         if ($data) {
-            //Vérification du formatage des collonnes
+            //Vérification du formatage des colonnes
+            if(array_unique($data[0]) != $data[0]){
+                return view('error',['error'=>4]);
+            }
             foreach ($data[0] as $key => $colonne) {
                 if(preg_match("/^[a-z][a-z0-9_]{0,63}$/i", $colonne) == 0){
                     return view('error',['error'=>4]);
