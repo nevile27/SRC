@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\StatFunc;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Spatie\DbDumper\Databases\MySql;
 
 class ExportController extends Controller
 {
@@ -24,8 +25,14 @@ class ExportController extends Controller
         }
 
         $prefix = Session::get('prefixe');
-        $exec_migrate = system(storage_path('app'.$s.'shell'. $s) . 'export.sh ' . $prefix . 's');     //DB::statement('SELECT * INTO OUTFILE "'.$path.'" FROM '.$prefix.'s');
-        return response()->download(storage_path('app'.$s.'public'.$s.'sql'. $s . $prefix . 's.sql'));
+        $exec_export = system(storage_path('app'.$s.'shell'. $s) . 'export.sh ' . $prefix . 's ' . env('DB_CONNECTION') . ' ' . env('DB_DATABASE') . ' ' . env('DB_USERNAME') . ' ' . env('DB_PASSWORD'));     //DB::statement('SELECT * INTO OUTFILE "'.$path.'" FROM '.$prefix.'s');
+        return ($exec_export === false)? 
+            view('error',['error'=>9]):
+            (
+                ($exec_export === "no")?
+                    view('error',['error'=>10]):
+                    response()->download(storage_path('app'.$s.'public'.$s.'sql'. $s . $prefix . 's.sql'))
+            );
     }
 
     public function exportPDF(Request $request)
