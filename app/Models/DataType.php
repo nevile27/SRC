@@ -10,12 +10,12 @@ class DataType {
         $types = [];
         foreach ($data[0] as $cle => $colonne) {
             $temp_types = [];
-            for ($i=0; $i < count($data) && $i < $precision; $i++) { 
+            for ($i=1; $i < count($data) && $i < $precision; $i++) { 
                 $temp_type = $this->detect($data[$i][$cle]);
                 if(array_key_exists($temp_type,$temp_types)){
                     $temp_types[$temp_type]++;
                 }else{
-                    $temp_types += [$temp_type => 0];
+                    $temp_types += [$temp_type => 1];
                 }
             }
             $previous = 0;
@@ -25,8 +25,17 @@ class DataType {
                 }
                 $previous = $nbr;
             }
+            if($previous == 0){
+                return false;
+            }
             switch ($real_type) {
                 case 'int':
+                    if(array_key_exists('text',$temp_types)){
+                        $real_type = "text";
+                    }
+                    if(array_key_exists('varchar',$temp_types)){
+                        $real_type = "varchar";
+                    }
                     if(array_key_exists('decimal',$temp_types)){
                         $real_type = "decimal";
                     }
@@ -41,6 +50,12 @@ class DataType {
                     }
                     break;
                 case 'bigint':
+                    if(array_key_exists('text',$temp_types)){
+                        $real_type = "text";
+                    }
+                    if(array_key_exists('varchar',$temp_types)){
+                        $real_type = "varchar";
+                    }
                     if(array_key_exists('decimal',$temp_types)){
                         $real_type = "decimal";
                     }
@@ -52,6 +67,12 @@ class DataType {
                     }
                     break;
                 case 'float':
+                    if(array_key_exists('text',$temp_types)){
+                        $real_type = "text";
+                    }
+                    if(array_key_exists('varchar',$temp_types)){
+                        $real_type = "varchar";
+                    }
                     if(array_key_exists('decimal',$temp_types)){
                         $real_type = "decimal";
                     }
@@ -60,16 +81,31 @@ class DataType {
                     }
                     break;
                 case 'double':
+                    if(array_key_exists('text',$temp_types)){
+                        $real_type = "text";
+                    }
+                    if(array_key_exists('varchar',$temp_types)){
+                        $real_type = "varchar";
+                    }
                     if(array_key_exists('decimal',$temp_types)){
                         $real_type = "decimal";
                     }
                     break;
-                case 'varchar':
+                case 'decimal':
                     if(array_key_exists('text',$temp_types)){
                         $real_type = "text";
                     }
+                    if(array_key_exists('varchar',$temp_types)){
+                        $real_type = "varchar";
+                    }
                     break;
                 case 'year':
+                    if(array_key_exists('text',$temp_types)){
+                        $real_type = "text";
+                    }
+                    if(array_key_exists('varchar',$temp_types)){
+                        $real_type = "varchar";
+                    }
                     if(array_key_exists('dateTime',$temp_types)){
                         $real_type = "dateTime";
                     }
@@ -81,6 +117,12 @@ class DataType {
                     }
                     break;
                 case 'date':
+                    if(array_key_exists('text',$temp_types)){
+                        $real_type = "text";
+                    }
+                    if(array_key_exists('varchar',$temp_types)){
+                        $real_type = "varchar";
+                    }
                     if(array_key_exists('dateTime',$temp_types)){
                         $real_type = "dateTime";
                     }
@@ -89,8 +131,27 @@ class DataType {
                     }
                     break;
                 case 'timestamp':
+                    if(array_key_exists('text',$temp_types)){
+                        $real_type = "text";
+                    }
+                    if(array_key_exists('varchar',$temp_types)){
+                        $real_type = "varchar";
+                    }
                     if(array_key_exists('dateTime',$temp_types)){
                         $real_type = "dateTime";
+                    }
+                    break;
+                case 'datetime':
+                    if(array_key_exists('text',$temp_types)){
+                        $real_type = "text";
+                    }
+                    if(array_key_exists('varchar',$temp_types)){
+                        $real_type = "varchar";
+                    }
+                    break;
+                case 'varchar':
+                    if(array_key_exists('text',$temp_types)){
+                        $real_type = "text";
                     }
                     break;
                 default:

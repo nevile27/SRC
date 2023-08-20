@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use App\Models\DataType;
+use Hamcrest\Type\IsNumeric;
 
 class AnalyseController extends Controller
 {
@@ -37,11 +38,20 @@ class AnalyseController extends Controller
         }
         
         if ($data) {
+            //Vérification du formatage des collonnes
+            foreach ($data[0] as $key => $colonne) {
+                if(preg_match("/^[a-z][a-z0-9_]{0,63}$/i", $colonne) == 0){
+                    return view('error',['error'=>4]);
+                }
+            }
+            Session::put('colonnes',$data[0]);
+
             // Identification du type de données dans chaque colonnes 
             $dataTypes = new DataType;
             $types = $dataTypes->dType($data,$request->spec4);
-
-            Session::put('colonnes',$data[0]);
+            if($types == false){
+                return view('error',['error'=>5]);
+            }
             Session::put('types',$types);
 
             // Suppression de la configuration existante
@@ -52,8 +62,8 @@ class AnalyseController extends Controller
             $migs = scandir("..".$s."database".$s."migrations");
             foreach ($migs as $value) {
                 if (str_contains($value, $prefix)) {
-                    $remove = system(storage_path('app'.$s.'shell'. $s) . 'remove.sh '. $value );
-                    if($remove === false){
+                    system(storage_path('app'.$s.'shell'. $s) . 'remove.sh '. $value , $exit_code);
+                    if($exit_code != 0){
                         return view('error',['error'=>1]);
                     }
                     break;
@@ -61,8 +71,8 @@ class AnalyseController extends Controller
             }
 
             // Creation du fichier de migration
-            $make_mig = system(storage_path('app'.$s.'shell'. $s) . 'maker.sh ' . $prefix);
-            if($make_mig === false){
+            system(storage_path('app'.$s.'shell'. $s) . 'maker.sh ' . $prefix, $exit_code);
+            if($exit_code != 0){
                 return view('error',['error'=>2]);
             }
 
@@ -73,15 +83,12 @@ class AnalyseController extends Controller
                     $mig_name = $value;
                 }
             }
-            $mig = file_get_contents("..".$s."database".$s."migrations" . $s . $mig_name);
-            if ($mig == false) {
+            if(!isset($mig_name)){
                 return view('error',['error'=>3]);
             }
+            $mig = file_get_contents("..".$s."database".$s."migrations" . $s . $mig_name);
             $pos = strrpos($mig, "\$table->timestamps();");
             $mig_stream = fopen("..".$s."database".$s."migrations" . $s. $mig_name, 'r+');
-            if($mig_stream == false){
-                return view('error',['error'=>4]);
-            }
             $content = fread($mig_stream, $pos);
             foreach ($data[0] as $key => $value) {
                 if($value == 'id'){
@@ -132,8 +139,8 @@ class AnalyseController extends Controller
             fclose($mig_stream);
 
             // Execution du fichier de migration, creation de la nouvelle table 
-            $exec_migrate = system(storage_path('app'.$s.'shell'. $s) . 'migrate.sh');
-            if($exec_migrate === false){
+            system(storage_path('app'.$s.'shell'. $s) . 'migrate.sh', $exit_code);
+            if($exit_code != 0){
                 return view('error',['error'=>6]);
             }
 
@@ -148,7 +155,9 @@ class AnalyseController extends Controller
                     $inserts += [--$key => $insert];
                 }
             }
-            if(DB::table($prefix . 's')->insert($inserts) == false){
+            try {
+                DB::table($prefix . 's')->insert($inserts);
+            } catch (\Throwable $th) {
                 return view('error',['error'=>7]);
             }
             return redirect(route('third'));

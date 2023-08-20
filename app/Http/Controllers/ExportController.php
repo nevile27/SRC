@@ -25,14 +25,8 @@ class ExportController extends Controller
         }
 
         $prefix = Session::get('prefixe');
-        $exec_export = system(storage_path('app'.$s.'shell'. $s) . 'export.sh ' . $prefix . 's ' . env('DB_CONNECTION') . ' ' . env('DB_DATABASE') . ' ' . env('DB_USERNAME') . ' ' . env('DB_PASSWORD'));     //DB::statement('SELECT * INTO OUTFILE "'.$path.'" FROM '.$prefix.'s');
-        return ($exec_export === false)? 
-            view('error',['error'=>9]):
-            (
-                ($exec_export === "no")?
-                    view('error',['error'=>10]):
-                    response()->download(storage_path('app'.$s.'public'.$s.'sql'. $s . $prefix . 's.sql'))
-            );
+        system(storage_path('app'.$s.'shell'. $s) . 'export.sh ' . $prefix . 's ' . env('DB_CONNECTION') . ' ' . env('DB_DATABASE') . ' ' . env('DB_USERNAME') . ' ' . env('DB_PASSWORD'), $exit_code);
+        return ($exit_code != 0)? view('error',['error'=>9]):response()->download(storage_path('app'.$s.'public'.$s.'sql'. $s . $prefix . 's.sql'));
     }
 
     public function exportPDF(Request $request)
