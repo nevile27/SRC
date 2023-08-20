@@ -99,23 +99,6 @@ class DataType {
                         $real_type = "varchar";
                     }
                     break;
-                case 'year':
-                    if(array_key_exists('text',$temp_types)){
-                        $real_type = "text";
-                    }
-                    if(array_key_exists('varchar',$temp_types)){
-                        $real_type = "varchar";
-                    }
-                    if(array_key_exists('dateTime',$temp_types)){
-                        $real_type = "dateTime";
-                    }
-                    if(array_key_exists('timestamp',$temp_types)){
-                        $real_type = "timestamp";
-                    }
-                    if(array_key_exists('date',$temp_types)){
-                        $real_type = "date";
-                    }
-                    break;
                 case 'date':
                     if(array_key_exists('text',$temp_types)){
                         $real_type = "text";
