@@ -1,7 +1,7 @@
 #!/bin/sh
 cd ../;
 case $2 in
-    myariadb)
+    mariadb)
         mariadb-dump --user=$4 --password=$5 --lock-tables $3 $1 > storage/app/public/sql/$1.sql
         ;;
 
