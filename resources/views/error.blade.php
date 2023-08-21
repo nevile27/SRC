@@ -78,7 +78,10 @@
                 <h4>Un fichier vide ou contenant une seule ligne n'est pas exploitable</h4>
                 @break
             @case(9)
-                <h2>Impossible d'exporter les données au format sql, l'export au format sql n'est peut-etre compatible avec la base de donnée utilisée !</h2>
+                <h2>Le fichier de sql nécessaire à l'export des données au format sql n'a pas pu etre créé !</h2>
+                @break
+            @case(10)
+                <h2>L'export au format sql n'est pas compatible avec la base de donnée utilisée !</h2>
                 <h4>Bases de données suppotées :</h4>
                 <ul>
                     <li>MariaDB ;</li>
@@ -87,10 +90,6 @@
                     <li>PostgreSQL ;</li>
                     <li>SQL Server ;</li>
                 </ul>
-                <h4>Une erreur d'export des données au format sql peut etre resultat exogène au support de la base de donnée</h4>
-                @break
-            @case(10)
-                <h2></h2>
                 @break
             @default
                 
