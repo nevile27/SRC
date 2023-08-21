@@ -56,7 +56,6 @@
                 @break
             @case(7)
                 <h2>Impossible d'écrire les données extraites en base de données, veuillez vérifier le contenu de votre fichier csv et sélectionner les paramètres d'annalyse adéquat !</h2>
-                <h4>{{$message}}</h4>
                 <h4>Paramètres d'analyses :</h4>
                 <ul>
                     <li>Séparateur: caractère utilisé dans le fichier csv pour separer les colonnes ;</li>

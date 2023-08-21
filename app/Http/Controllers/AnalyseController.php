@@ -161,7 +161,7 @@ class AnalyseController extends Controller
             try {
                 DB::table($prefix . 's')->insert($inserts);
             } catch (\Throwable $th) {
-                return view('error',['error'=>7,'message'=>$th->getMessage()]);
+                return view('error',['error'=>7]);
             }
             return redirect(route('third'));
         }
