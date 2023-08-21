@@ -24,7 +24,8 @@ class ExportController extends Controller
         }
 
         $prefix = Session::get('prefixe');
-        $export = system(storage_path('app'.$s.'shell'. $s) . 'export.sh ' . $prefix . 's ' . env('DB_CONNECTION') . ' ' . env('DB_DATABASE') . ' ' . env('DB_USERNAME') . ' ' . env('DB_PASSWORD'), $exit_code);
+        $db = config('database.default');
+        $export = system(storage_path('app'.$s.'shell'. $s) . 'export.sh ' . $prefix . 's ' . config("database.default") . ' ' . config("database.$db.connections.database") . ' ' . config("database.$db.connections.username") . ' ' . config("database.$db.connections.password"), $exit_code);
         return ($exit_code != 0)? view('error',['error'=>9]):(($export=="no")?view('error',['error'=>10]):response()->download(storage_path('app'.$s.'public'.$s.'sql'. $s . $prefix . 's.sql')));
     }
 

@@ -56,4 +56,4 @@
             <button><a href="{{route('twelve')}}?colonne={{$colonne}}&ordre={{$ordre}}">format PDF</a></button>  
     @endswitch
 </div>
-<input type="hidden" name="hote" value="{{env('APP_URL')}}">
+<input type="hidden" name="hote" value="{{config('app.url')}}">

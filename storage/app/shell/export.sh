@@ -1,6 +1,7 @@
 #!/bin/sh
 cd ../;
 case $2 in
+
     mariadb)
         mariadb-dump --user=$4 --password=$5 --lock-tables $3 $1 > storage/app/public/sql/$1.sql
         ;;
@@ -9,7 +10,7 @@ case $2 in
         mysqldump --user=$4 --password=$5 $3 $1 > storage/app/public/sql/$1.sql
         ;;
 
-    postgresql)
+    pgsql)
         pg_dump --username=$4 --password=$5 $3 $1 > storage/app/public/sql/$1.sql
         ;;
 
@@ -24,4 +25,5 @@ case $2 in
     *)
         echo "no"
         ;;
+        
 esac

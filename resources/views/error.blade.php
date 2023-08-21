@@ -82,7 +82,7 @@
                 @break
             @case(10)
                 <h2>L'export au format sql n'est pas compatible avec la base de donnée utilisée !</h2>
-                <h4>Bases de données suppotées :</h4>
+                <h4>Bases de données prises en charges :</h4>
                 <ul>
                     <li>MariaDB ;</li>
                     <li>MySQL ;</li>
@@ -94,7 +94,7 @@
             @default
                 
         @endswitch
-        <p><b><a href="/">Retour a l'accueil</a></b></p>
+        <p><b><a href="{{url()->previous()}}">précédent</a></b> | <b><a href="/">Retour a l'accueil</a></b></p>
     </div>
 </body>
 </html>
