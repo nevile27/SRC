@@ -15,11 +15,13 @@ class CreateDonneesTable extends Migration
     {
         Schema::create('donnees', function (Blueprint $table) {
             $table->id();
-            $table->string('country');
-			$table->integer('beer_servings');
-			$table->integer('spirit_servings');
-			$table->integer('wine_servings');
-			$table->float('total_litres_of_pure_alcohol');
+            $table->date('Start');
+			$table->date('End');
+			$table->string('Pollster');
+			$table->integer('Favor');
+			$table->integer('Oppose');
+			$table->string('Url');
+			$table->text('Text');
 			$table->timestamps();
         });
     }
