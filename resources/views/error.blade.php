@@ -91,6 +91,9 @@
                     <li>SQL Server ;</li>
                 </ul>
                 @break
+            @case(11)
+                <h2>Le nombre maximum de sessions actives sur le serveur a été attient, veuillez patienter quelques minutes et réessayer</h2>
+                @break
             @default
                 
         @endswitch

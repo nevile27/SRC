@@ -15,8 +15,11 @@ class UploadController extends Controller
         ]);
 
         $data = DB::table('sessions')->pluck('id')->toArray();
-        $prefixes = ["donnee", "circonstance", "element", "information", "postulat", "principe", "renseignement"];
+        $prefixes = ["donnee", "circonstance", "element", "information", "postulat", "principe", "renseignement","precision","condition","critère"];
         foreach ($data as $key => $id) {
+            if($key >= count($prefixes)){
+                return view('error',['error'=>11]);
+            }
             if($id == Session::getId()){
                 $prefix = $prefixes[$key];
             }
