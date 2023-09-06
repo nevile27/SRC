@@ -27,7 +27,7 @@
                     <li>ne pas dépasser 128 caractères (limite fixé à 64 caractères dans l'application);</li>
                     <li>commencer par une lettre;</li>
                     <li>comprendre uniquement des lettres majuscules ou minuscules, des chiffres, et le tiret bas ( _ );</li>
-                    <li>un nom d'objet ne peut pas être un mot réservé de SQL sauf à être utilisé avec des guillemets;</li>
+                    <li>ne peut pas être un des <a href="https://www.ibm.com/docs/fr/psfa/7.1.0?topic=keywords-sql-common-reserved-words"  target="_blank">mots réservés de SQL</a> sauf à être utilisé avec des guillemets;</li>
                     <li>être insensible à la casse</li>
                 </ul>
                 <h4>2 colonnes ne peuvent avoir un nom identique</h4>
@@ -72,8 +72,8 @@
                     <li>ne pas dépasser 128 caractères (limite fixé a 64 caractères dans l'application);</li>
                     <li>commencer par une lettre;</li>
                     <li>comprendre uniquement des lettres majuscules ou minuscules, des chiffres, et le tiret bas ( _ );</li>
-                    <li>un nom d'objet ne peut pas être un mot réservé de SQL sauf à être utilisé avec des guillemets;</li>
-                    <li>être insensible à la casse</li>
+                    <li>ne peut pas être un des <a href="https://www.ibm.com/docs/fr/psfa/7.1.0?topic=keywords-sql-common-reserved-words"  target="_blank">mots réservés de SQL</a> sauf à être utilisé avec des guillemets;</li>
+                    <li>être insensible à la casse </li>
                 </ul>
                 <h4>Un fichier vide ou contenant une seule ligne n'est pas exploitable</h4>
                 @break
@@ -97,7 +97,7 @@
             @default
                 
         @endswitch
-        <p><b><a href="{{url()->previous()}}">précédent</a></b> | <b><a href="/">Retour à l'accueil</a></b></p>
+        <p><b><a href="javascript:history.back()">précédent</a></b> | <b><a href="/">Retour à l'accueil</a></b></p>
     </div>
 </body>
 </html>
