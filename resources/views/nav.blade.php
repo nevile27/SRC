@@ -10,10 +10,10 @@
             <a href="{{ route('nine') }}">Nuages</a>
         </li>
         <li {{ ($route == 'four')? 'class=selected':'' }}>
-            <a href="{{ route('four') }}">Batonnets V</a>
+            <a href="{{ route('four') }}">Batônnets V</a>
         </li>
         <li {{ ($route == 'five')? 'class=selected':'' }}>
-            <a href="{{ route('five') }}">Batonnets H</a>
+            <a href="{{ route('five') }}">Batônnets H</a>
         </li>
         <li {{ ($route == 'six')? 'class=selected':'' }}>
             <a href="{{ route('six') }}">Histogrammes V</a>
@@ -22,7 +22,7 @@
             <a href="{{ route('seven') }}">Histogrammes H</a>
         </li>
         <li {{ ($route == 'eight')? 'class=selected':'' }}>
-            <a href="{{ route('eight') }}">Camambers</a>
+            <a href="{{ route('eight') }}">Camemberts</a>
         </li>
     </ul>
     <button> <a href="/">Accueil</a></button>
@@ -30,25 +30,25 @@
 <div id="download">
     @switch($route)
         @case('four')
-            <h2>Selectionnez Abscisse et Ordonnées pour tracer vos diagrammes a partir des données :</h2>
+            <h2>Sélectionnez l’abscisse et les ordonnées pour tracer vos diagrammes à partir des données :</h2>
             @break
         @case('five')
-            <h2>Selectionnez Abscisses et Ordonnée pour tracer vos diagrammes a partir des données :</h2>
+            <h2>Sélectionnez les abscisses et l’ordonnée pour tracer vos diagrammes à partir des données :</h2>
             @break
         @case('six')
-            <h2>Selectionnez les colonnes pour tracer vos histogrammes a partir des données :</h2>
+            <h2>Sélectionnez les colonnes pour tracer vos histogrammes à partir des données :</h2>
             @break
         @case('seven')
-            <h2>Selectionnez les colonnes pour tracer vos histogrammes a partir des données :</h2>
+            <h2>Sélectionnez les colonnes pour tracer vos histogrammes à partir des données :</h2>
             @break
         @case('eight')
-            <h2>Selectionnez Référence et Données pour tracer vos camambers a partir des données :</h2>
+            <h2>Sélectionnez la référence et les quantités pour tracer vos camemberts à partir des données :</h2>
             @break
         @case('nine')
-            <h2>Selectionnez Abscisse et Ordonnées pour tracer vos nuages de points a partir des données :</h2>
+            <h2>Sélectionnez l’abscisse et les ordonnées pour tracer vos nuages de points à partir des données :</h2>
             @break
         @case('ten')
-            <h2>Selectionnez Abscisse et Ordonnées pour tracer vos courbes a partir des données :</h2>
+            <h2>Sélectionnez l’abscisse et les ordonnées pour tracer vos courbes à partir des données :</h2>
             @break
         @default
             <h2>Télécharger les données :</h2>

@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use App\Models\DataType;
-use Hamcrest\Type\IsNumeric;
 
 class AnalyseController extends Controller
 {

@@ -87,7 +87,7 @@
             <table>
                 <tr class="head">
                     <th>Colonnes</th>
-                    <th>Types detectés</th>
+                    <th>Types détectés</th>
                 </tr>
                 @foreach ($colonnes as $key => $item)
                     <tr>

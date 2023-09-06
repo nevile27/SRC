@@ -12,7 +12,7 @@
     @isset($path)
         <form action="{{ route('first') }}" id="f1">
             
-            <h3>Définnissez les paramettres d'annalyse :</h3>
+            <h3>Définir les paramètres d'analyse :</h3>
             <div>
                 <div>
                     <label for="spec1">Séparateur : </label><br/>
@@ -84,7 +84,9 @@
             var files = this.files,
                 name = files[0].name;
             console.log(files);
-            var span = document.querySelector('#name');
+            var span = document.querySelector('#name'),
+                i = document.querySelector('.fa-solid');
+            i.className = i.getAttribute('class').replace('fa-shake','');
             span.innerHTML = name;
             span.style.fontStyle = "italic";
         }
