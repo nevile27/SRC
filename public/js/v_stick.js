@@ -33,13 +33,15 @@ function plot(x = [], Y = [], yName) {
             j++;
         });
     }else{
+        k=0;
         Y.forEach(el => {
             data.push({
                 x:x,
                 y:el,
-                name: 'name',
+                name: yName[k],
                 type: 'bar',
-            })
+            });
+            k++;
         });
 
         var layout = { barmode: 'group', title: "Cliquez pour saisir le titre" };

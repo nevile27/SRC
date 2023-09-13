@@ -34,14 +34,16 @@ function plot(X = [], y = [], xName) {
             j++;
         });
     }else{
+        k=0;
         X.forEach(el => {
             data.push({
                 x:el,
                 y:y,
-                name: 'name',
+                name: xName[k],
                 type: 'bar',
                 orientation: 'h',
-            })
+            });
+            k++;
         });
 
         var layout = { barmode: 'group', title: "Cliquez pour saisir le titre" };

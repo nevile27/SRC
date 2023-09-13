@@ -13,17 +13,17 @@ function plot(x = [], Y = [], yName, mode) {
             var div = document.createElement('div');
             div.id = "tester"+j;
             p.appendChild(div);
-            $k = 0;
+            k = 0;
             Y.forEach(y => {
                 y = y.slice(i,i+50);
                 data.push({
                     x:el,
                     y:y,
-                    name: yName[$k],
+                    name: yName[k],
                     mode: mode,
                     type: 'scatter',
                 });
-                $k++;
+                k++;
             });
 
             var layout = { barmode: 'group', title: "Cliquez pour saisir le titre" };
@@ -34,13 +34,16 @@ function plot(x = [], Y = [], yName, mode) {
             j++;
         });
     }else{
+        k=0;
         Y.forEach(el => {
             data.push({
                 x:x,
                 y:el,
-                name: 'name',
+                name: yName[k],
+                mode: mode,
                 type: 'scatter',
-            })
+            });
+            k++;
         });
 
         var layout = { title: "Cliquez pour saisir le titre" };
@@ -59,9 +62,9 @@ function loadData() {
     qry.setRequestHeader('X-CSRF-TOKEN',csrf.getAttribute('content'));
     qry.onreadystatechange = function(){
         if(qry.readyState == qry.DONE && qry.status == 200){
-            //alert(qry.response);
             var data = JSON.parse(qry.response);
             plot(data['x'],data['y'],data['yName'],data['mode']);
+            console.log(data['mode']);
         }else if(qry.readyState == qry.DONE && qry.status != 200){
             alert('Une erreur s\'est produite:\n\nCode:' + qry.status + ',\nType:' + qry.statusText);
         }

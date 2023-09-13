@@ -26,7 +26,7 @@
                 <ul>
                     <li>ne pas dépasser 128 caractères (limite fixé à 64 caractères dans l'application);</li>
                     <li>commencer par une lettre;</li>
-                    <li>comprendre uniquement des lettres majuscules ou minuscules, des chiffres, et le tiret bas ( _ );</li>
+                    <li>comprendre uniquement des lettres majuscules ou minuscules non accentuées, des chiffres, et le tiret bas ( _ );</li>
                     <li>ne peut pas être un des <a href="https://www.ibm.com/docs/fr/psfa/7.1.0?topic=keywords-sql-common-reserved-words"  target="_blank">mots réservés de SQL</a> sauf à être utilisé avec des guillemets;</li>
                     <li>être insensible à la casse</li>
                 </ul>
@@ -71,7 +71,7 @@
                 <ul>
                     <li>ne pas dépasser 128 caractères (limite fixé a 64 caractères dans l'application);</li>
                     <li>commencer par une lettre;</li>
-                    <li>comprendre uniquement des lettres majuscules ou minuscules, des chiffres, et le tiret bas ( _ );</li>
+                    <li>comprendre uniquement des lettres majuscules ou minuscules non accentuées, des chiffres, et le tiret bas ( _ );</li>
                     <li>ne peut pas être un des <a href="https://www.ibm.com/docs/fr/psfa/7.1.0?topic=keywords-sql-common-reserved-words"  target="_blank">mots réservés de SQL</a> sauf à être utilisé avec des guillemets;</li>
                     <li>être insensible à la casse </li>
                 </ul>

@@ -15,9 +15,10 @@ class CreateDonneesTable extends Migration
     {
         Schema::create('donnees', function (Blueprint $table) {
             $table->id();
-            $table->string('verb');
-			$table->string('Frame_realisation');
-			$table->integer('Frame_frequency');
+            $table->string('Groupe_especes');
+			$table->string('Statut');
+			$table->text('Especes');
+			$table->integer('Nombre_especes');
 			$table->timestamps();
         });
     }

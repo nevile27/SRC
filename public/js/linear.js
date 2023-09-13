@@ -35,13 +35,16 @@ function plot(x = [], Y = [], yName, mode, forme) {
             j++;
         });
     }else{
+        k = 0;
         Y.forEach(el => {
             data.push({
                 x:x,
                 y:el,
-                name: 'name',
+                name: yName[k],
+                mode: mode,
                 type: 'scatter',
-            })
+            });
+            k++;
         });
 
         var layout = { title: "Cliquez pour saisir le titre" };
