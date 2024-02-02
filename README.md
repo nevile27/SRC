@@ -1,64 +1,67 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<!--<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+</p>-->
 
-## About Laravel
+# SRC
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Système de Reporting basé sur les 
+fichiers CSV, c’est-à-dire un système qui utilise les fichiers CSV comme source de données et 
+qui permet de les analyser et de les visualiser de manière efficace et pertinente.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Auteurs
 
-## Learning Laravel
+- [@nevile27](https://www.github.com/nevile27)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Démo
 
-## Laravel Sponsors
+Cliquez sur les vignettes pour voir la video de démonstration sur youtube.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+[![Demo](https://i9.ytimg.com/vi_webp/m-AIKhQjP_M/mq1.webp?sqp=CPyF860G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgZShlMA8=&rs=AOn4CLAr0k4a1oNVYNQc6O3pFws5lYansA)](https://youtu.be/m-AIKhQjP_M)
 
-### Premium Partners
+[![Demo](https://i9.ytimg.com/vi_webp/m-AIKhQjP_M/mq2.webp?sqp=CPyF860G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgZShlMA8=&rs=AOn4CLCevPSt3VLxUB4-aUpm5r-GifB80g)](https://youtu.be/m-AIKhQjP_M)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+[![Demo](https://i9.ytimg.com/vi_webp/m-AIKhQjP_M/mq3.webp?sqp=CPyF860G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGE0gZShiMA8=&rs=AOn4CLD7l9RHVf7WfjAQDPL6dXAFC8Vi_g)](https://youtu.be/m-AIKhQjP_M)
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Installation en local
 
-## Code of Conduct
+4 outils sont nécessaire à l'installation local de l’application, à savoir :
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    ▪ Un SGBD compatible avec Laravel 8;
 
-## Security Vulnerabilities
+    ▪ Les binaires PHP de version >= 7.3 ;
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    ▪ Le gestionnaire de dépendance PHP Composer ;
 
-## License
+    ▪ Le gestionnaire de dépendance JavaScript NPM.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Cloner le projet sur votre machine et exécuter les commandes suivantes :
+
+```bash
+  git clone https://github.com/nevile27/SRC
+  cd SRC
+  composer install
+  npm install
+  cp .env.example .env
+  php artisan key:generate
+  nano .env
+```
+Configurer les variables DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, et DB_PASSWORD du fichier .env avec les informations de connexion à la base de données créée pour le projet avec votre SGBD. Définir la variable SESSION_DRIVER sur `database` au lieu de `file` et la variable APP_URL sur `http://localhost:8000`.
+
+Sauvegarder les modifications et exécuter les commandes :
+
+```bash
+  php artisan migrate
+  php artisan serve
+```
+Vous pouvez alors accéder à l'application depuis votre navigateur avec l'url `http://localhost:8000`.
+
+
+
