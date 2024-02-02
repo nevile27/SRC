@@ -23,11 +23,11 @@ qui permet de les analyser et de les visualiser de manière efficace et pertinen
 
 Cliquez sur les vignettes pour voir la video de démonstration sur youtube.
 
-[![Demo](https://i9.ytimg.com/vi_webp/m-AIKhQjP_M/mq1.webp?sqp=CPyF860G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgZShlMA8=&rs=AOn4CLAr0k4a1oNVYNQc6O3pFws5lYansA)](https://youtu.be/m-AIKhQjP_M)
+[![image](https://github.com/nevile27/SRC/assets/69016800/f96395ba-de3e-40f2-b8da-7ed28ca04cf9)](https://youtu.be/m-AIKhQjP_M)
 
-[![Demo](https://i9.ytimg.com/vi_webp/m-AIKhQjP_M/mq2.webp?sqp=CPyF860G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgZShlMA8=&rs=AOn4CLCevPSt3VLxUB4-aUpm5r-GifB80g)](https://youtu.be/m-AIKhQjP_M)
+[![image](https://github.com/nevile27/SRC/assets/69016800/4b287afe-920b-4d33-abe4-39e2cf1fa6e4)](https://youtu.be/m-AIKhQjP_M)
 
-[![Demo](https://i9.ytimg.com/vi_webp/m-AIKhQjP_M/mq3.webp?sqp=CPyF860G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGE0gZShiMA8=&rs=AOn4CLD7l9RHVf7WfjAQDPL6dXAFC8Vi_g)](https://youtu.be/m-AIKhQjP_M)
+[![image](https://github.com/nevile27/SRC/assets/69016800/869c1c9c-ce52-44d4-bed0-d74eb32310b3)](https://youtu.be/m-AIKhQjP_M)
 
 
 ## Installation en local
