@@ -42,6 +42,7 @@ function plot(x = [], Y = [], yName, mode, forme) {
                 y:el,
                 name: yName[k],
                 mode: mode,
+                line: {shape: forme},
                 type: 'scatter',
             });
             k++;
