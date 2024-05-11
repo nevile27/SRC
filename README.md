@@ -32,9 +32,9 @@ Cliquez sur les vignettes pour voir la video de démonstration sur youtube.
 
 ## Utiliser en ligne
 
-Testez notre outils en ligne et faites nous vos retours.
+Testez notre outil en ligne et faites nous vos retours.
 
-- [data.nes-ite.com](http://data.nes-ite.com/)
+[data.nes-ite.com](http://data.nes-ite.com/)
 
 
 ## Installation en local
