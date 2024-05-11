@@ -37,7 +37,7 @@ Testez notre outil en ligne et faites nous vos retours.
 [data.nes-ite.com](http://data.nes-ite.com/)
 
 
-## Installation en local
+## Installer en local
 
 4 outils sont nécessaire à l'installation local de l’application, à savoir :
 
